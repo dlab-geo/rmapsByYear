@@ -40,16 +40,29 @@
 
 
 
-
 #--------------------------------------------------------------------------
 # Set Important Parameters
 # THESE SHOULD BE THE ONLY VALUES YOU NEED TO CHANGE to run this script
 #--------------------------------------------------------------------------
 
 # Identify the folder that contains the input and output files
-my_data_directory <- "~/Documents/Dlab/consults/robin_e/top_percent"
+my_data_directory <- "~/Documents/Dlab/consults/robin_e/rmapsByYear"
+
+#
+# INPUT DATA
+#
+
+# Available Sample data
+# Source: http://www.shsu.edu/eco_mwf/inequality.html
+#         http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls
+# To use, download one of the following files and then and set the paramaters below
+# sample_state_data_by_year_long.csv
+# sample_state_data_by_year_wide.csv
+
+
 
 # Input data file type (csv or excel)
+
 infile_type = "excel"
 
 # The name of the input file
@@ -120,7 +133,7 @@ include_lowest_in_bin1 <- FALSE # If the lowest map_break is 1
 
 # Color palettes
 # To see the names of the different palettes you can try see: 
-# https://github.com/dlab-geo/rMaps/raw/master/data/r_color_palettes.pdf
+# https://github.com/dlab-geo/rmapsByYear/raw/master/data/r_color_palettes.pdf
 #
 useSequentialColors <- TRUE # set to FALSE to use divergent
 
@@ -343,7 +356,7 @@ mymap <- ichoropleth2(vals~State, data = thedata,  pal=map_color_palette, nodata
 # See: https://github.com/markmarkoh/datamaps for the kinds of things you can set for map style
 mymap$set(
   geographyConfig = list(
-    dataUrl = "http://raw.githubusercontent.com/dlab-geo/rMaps/master/data/usa_with_bigger_DC_topo.json",
+    dataUrl = "http://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
     #dataUrl = "https://raw.githubusercontent.com/dlab-geo/rMaps/master/data/state_squares_from_kwalker.json", # not working
     #scope = 'state_squares', # you need to define the scope if the name of the map in the json file is not "usa"
     borderColor= map_border_color,
