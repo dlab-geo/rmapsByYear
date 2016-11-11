@@ -56,17 +56,15 @@ my_data_directory <- "~/Documents/Dlab/consults/robin_e/rmapsByYear"
 # Source: http://www.shsu.edu/eco_mwf/inequality.html
 #         http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls
 # To use, download one of the following files and then and set the paramaters below
-# sample_state_data_by_year_long.csv
-# sample_state_data_by_year_wide.csv
-
-
+sample_data_long <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_long.csv"
+sample_data_wide <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_wide.csv"
 
 # Input data file type (csv or excel)
-
-infile_type = "excel"
+infile_type = "csv" # excel"
 
 # The name of the input file
-in_data_file <- "Frank_WTID_2013_shares_deciles.xlsx" 
+in_data_file <- sample_data_long
+#in_data_file <- "Frank_WTID_2013_shares_deciles.xlsx" 
 #in_data_file <- "top10returnsper10kpersons1916.xlsx"
 #in_data_file <- "SOI data all Returns Map Input2.xlsx"
 in_data_worksheet <- 1  # The excel worksheet with the data, default is the first sheet
@@ -81,28 +79,23 @@ indata_data_colname <- "Top1_adj" # or NULL
 indata_year_colname <- "Year" #"year" # or NULL
 
 # The name of the column in the input excel worksheet that contains:
-state_colname <- "state"  # name of column with state name or abbreviation
+state_colname <- "State"  # name of column with state name or abbreviation
 state_type <- "name" # set to name if not abbreviation (default)
 
 # Years to be mapped - currently ignored if data in long format already
-start_year <- "1916"      # The first year of data
-end_year <- "1916"        # The last year of data - can be same
-#end_year <- "2011"        # The last year of data
+start_year <- "1917"      # The first year of data
+end_year <- "2013"        # The last year of data - can be same
 
 
 # The name of the output file that will contain the map
-out_map_file <- "soi_map_top1.html"
+out_map_file <- "map_top1.html"
 
 # The title along the top of the map - THE YEAR WILL BE APPENDED
-#map_title <- "SOI Returns Per 1000 Persons, " 
-#map_title <- "SOI Returns Per 1000 - Percent of National Avg, "
-map_title <- "Top 1% Income Share, "
+map_title <- "Top 1% Income Earners Share of Total Income, "
 
 # When you click over the state you get a popup box
 # that displays the state name, year, and data value.
 # The data_label_in_popup is the name for the data value that will display in popup
-#data_label_in_popup <- "SOI per 1000: "                 
-#data_label_in_popup <- "Percent National Avg: "
 data_label_in_popup <- "Top 1% Income Share: "
 
 # The number of decimal places to display for the mapped data
@@ -204,13 +197,16 @@ setwd(my_data_directory)
 
 # Read in the code for the local, customized version of the rMap
 # This version has my ichoropleth2 function
-source('./Datamaps_customized.R')
+source('./R/Datamaps_customized.R')
 
 # Read in the Excel file
 # Note: you can also read in a CSV file with the command:
 # read.csv(in_data_file, StringsAsFactors=FALSE)
-indata <- read_excel(in_data_file)
-
+if (infile_type == "excel") {
+  indata <- read_excel(in_data_file)
+} else {
+  indata <- read.csv(in_data_file, stringsAsFactors = FALSE)
+}
 # We will take the data for each column and populate the following new columns foreach state & year combo:
 year_colname <- 'year'    # the column with the year (and only the year) in YYYY format (e.g., 2016)
 data_colname <- 'vals'    # the column that will contain the data values to be used to determine the map colors (data_colname)
@@ -225,7 +221,7 @@ if (state_colname != 'State') {
 if (state_type == "name") {
   indata$state_name <- indata$State # save original input
   indata$State <- gsub("(^|[[:space:]])([[:alpha:]])", "\\1\\U\\2", indata$State, perl=TRUE) # standardize to init caps
-  state_abbrev <- read.csv("state_abbrev.csv", stringsAsFactors = FALSE)
+  state_abbrev <- read.csv("data/state_abbrev.csv", stringsAsFactors = FALSE)
   indata <- merge(x = indata, y = state_abbrev[ , c("name", "code")], by.x="State", by.y = "name", all.x=TRUE, incomparables=NA)
   indata$State <- indata$code
 }
@@ -349,9 +345,9 @@ if (! is.null(map_breaks)) {
 # Create the map
 #
 mymap <- ichoropleth2(vals~State, data = thedata,  pal=map_color_palette, nodata_color=map_nodata_color, nodata_label=map_nodata_label, my_breaks=map_breaks, ncuts=map_ncuts, 
-                      animate="year", labels=show_map_labels, legend=show_map_legend, my_title=map_title, include_lowest=include_lowest_in_bin1)
+                      animate="year", labels=show_map_labels, legend=show_map_legend, my_title=map_title, include_lowest=include_lowest_in_bin1, na.rm=TRUE)
 
-# Below we are using a custom map that makes WASH D.C bigger (so you can click it)
+# Below we are using a custom map that makes Washington D.C bigger (so you can click it)
 # So we need to set the dataUrl
 # See: https://github.com/markmarkoh/datamaps for the kinds of things you can set for map style
 mymap$set(

@@ -130,15 +130,17 @@ ichoropleth2 <- function(x, data, pal = "Blues", nodata_color="white", nodata_la
   d <- Datamaps$new()
   fml = lattice::latticeParseFormula(x, data = data)
 
-  myfillkey <- cut(
+  
+
+  if (!is.null(my_breaks)) {
+      myfillkey <- cut(fml$left, breaks = my_breaks, ordered_result=TRUE, include.lowest=include_lowest)
+  } else {
+    myfillkey <- cut(
       fml$left,
       unique(quantile(fml$left, seq(0, 1, 1/ncuts))),
       ordered_result = TRUE,
       include.lowest = include_lowest
-  )
-
-  if (!is.null(my_breaks)) {
-      myfillkey <- cut(fml$left, breaks = my_breaks, ordered_result=TRUE, include.lowest=include_lowest)
+    )
   }
 
   data = transform (data, fillKey = myfillkey)
