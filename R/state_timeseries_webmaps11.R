@@ -91,12 +91,12 @@ end_year <- "2013"        # The last year of data - can be same
 out_map_file <- "map_top1.html"
 
 # The title along the top of the map - THE YEAR WILL BE APPENDED
-map_title <- "Top 1% Income Earners Share of Total Income, "
+map_title <- "Top 1% Earners Share of Total Income, "
 
 # When you click over the state you get a popup box
 # that displays the state name, year, and data value.
 # The data_label_in_popup is the name for the data value that will display in popup
-data_label_in_popup <- "Top 1% Income Share: "
+data_label_in_popup <- "Percent Share: "
 
 # The number of decimal places to display for the mapped data
 #num_decimal_places = 0
@@ -142,9 +142,6 @@ map_color_palette_sequential <- "YlOrBr" #"Blues"  # The name of the color palet
 map_nodata_color_sequential <- "#989fa5" # Grey
 #map_border_color_sequential <- "#FFFFFF" # White, outline color to use with sequential color palette
 map_border_color_sequential <- "#989fa5" # Grey, outline color 
-
-# The label / value we use to indicate no data
-map_nodata_label <- "[0]"
 
 show_map_legend <- TRUE     # set to TRUE or FALSE - no quotes
 show_map_labels <- TRUE    # set to TRUE or FALSE - no quotes
@@ -290,6 +287,7 @@ byYear$year <- as.integer(as.character(byYear$year))
 
 # Set the data to display in the map popup to be the same as the data values
 byYear$popup_data <- byYear$vals
+byYear$popup_data[is.na(thedata$popup_data)] <- "no data" #set no data popup value
 
 if (create_qbins_by_year == TRUE) {
   # Create 5 quantile bins
@@ -310,6 +308,7 @@ if (create_qbins_by_year == TRUE) {
 
 # Select only the data columns that will be displayed on the map
 thedata <- byYear[c('State','year','vals', 'popup_data')]
+
 
 # Add the data label (for the map popup) to the data table
 # not efficient but only way to pass the value to underlying map function
@@ -335,12 +334,27 @@ if (useSequentialColors == TRUE) {
 #
 if (! is.null(map_breaks)) {
   # Append the highest data value to the map breaks
-  map_breaks <- c(map_breaks, max(thedata$vals))  
+  map_breaks <- c(map_breaks, max(na.omit(thedata$vals)))  
   map_breaks <- unique(map_breaks)
   # Number of bins into which the data will be groupped
   map_ncuts <- length(map_breaks) - 1  # this gives us the correct number of bins 
 }
 
+# Reset no data to zero or lower value
+minval <- min(na.omit(thedata$vals))
+if (minval > 0) {
+  print("Setting no data value to 0")
+  thedata$vals[is.na(thedata$vals)] <- 0
+  # The label / value we use to indicate no data
+  map_nodata_label <- "[0]"
+} else {
+  no_data_val <- minval -1
+  print(paste("Setting no data value to ", no_data_val))
+  thedata$vals[is.na(thedata$vals)] <- no_data_val
+  # The label / value we use to indicate no data
+  map_nodata_label <- paste0('[',no_data_val,']')
+}
+  
 #
 # Create the map
 #
@@ -352,12 +366,12 @@ mymap <- ichoropleth2(vals~State, data = thedata,  pal=map_color_palette, nodata
 # See: https://github.com/markmarkoh/datamaps for the kinds of things you can set for map style
 mymap$set(
   geographyConfig = list(
-    dataUrl = "http://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rMaps/master/data/usa_with_bigger_DC_topo.json",
     #dataUrl = "https://raw.githubusercontent.com/dlab-geo/rMaps/master/data/state_squares_from_kwalker.json", # not working
     #scope = 'state_squares', # you need to define the scope if the name of the map in the json file is not "usa"
     borderColor= map_border_color,
     popupTemplate = "#! function(geo, data){
-    return '<div class=\"hoverinfo\"><strong>'+ geo.properties.name + ' ' + data.year + '</strong>' + '<br>' + data.data_label + data.popup_data + '% </div>';  } !#"
+    return '<div class=\"hoverinfo\"><strong>'+ geo.properties.name + ' ' + data.year + '</strong>' + '<br>' + data.data_label + data.popup_data + '</div>';  } !#"
   )
 )
  
