@@ -180,6 +180,7 @@ ichoropleth2 <- function(x, data, pal = "Blues", nodata_color="white", nodata_la
     d$addAssets(
       jshead = "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"
     )
+    
     if (play == T){
       d$setTemplate(chartDiv = sprintf("
         <div class='container'>
@@ -255,7 +256,7 @@ ichoropleth2 <- function(x, data, pal = "Blues", nodata_color="white", nodata_la
       #)
 
     }
-    d$set(newData = data, data = data[[1]])
+    d$set(newData = data, data = data[[1]], labels=labels)
     
   } else {
     d$set(data = dlply(data, fml$right.name))
