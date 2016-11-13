@@ -74,6 +74,9 @@ library(rMaps)
 
 ### Step 2. Read in data in the format required by *rmaps*
 ```{r, echo=TRUE}
+# set working directory
+my_rmaps_directory <- "~/Documents/Dlab/consults/robin_e/rmapsByYear"
+setwd(my_rmaps_directory)
 
 # Identify the data to be mapped
 #in_data_file <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_long.csv"
@@ -203,21 +206,22 @@ The name of states data in the TopoJSON file is `usa`. If you look inside a GeoJ
 
 <img src="images/ic_geojson.png" width="600px" />
 
-You can use a custom map with ichoropleth if: 1) the GeoJSON file is a url, 2) you can identify the name of the data in the GeoJson file.  For example take a look at this customized [GeoJSON file](https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json).  If the name is not `usa` it needs to be set using the `scope` Datamaps variable.
+You can use a custom map with ichoropleth if the following conditions are true.
+1.  The geographic data are in a TopoJSON (not GeoJSON) file and you can access that file via a URL, 
+2.  You can identify the name of the data in the GeoJson file.  For example take a look at this customized [GeoJSON file](https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json).  If the name is not `usa` it needs to be set using the `scope` Datamaps variable.
+3. The id of each polygon in the TopoJSON file is a state abbrevation matching the values in the R data frame (same format, same case).
 
 ```{r, eval=FALSE}
-mymap <- ichoropleth(vals ~ State, data = indata, animate="year")
-mymap$set(
-  dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
-  scope = 'us_states', # you need to define the scope if the name of the map in the topojson file is not "usa"
+mymap2 <- ichoropleth(vals ~ State, data = indata, animate="year")
+mymap2$set(
   geographyConfig = list(
-    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
-      + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
-    '</div>';  } !#"
+    dataUrl = "http://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
+    scope = "us_states",
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +   '</div>';  } !#"
   )
 )
-mymap
-mymap
+mymap2
+
 
 mymap$set(
   geographyConfig = list(
