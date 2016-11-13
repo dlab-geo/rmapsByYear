@@ -192,7 +192,8 @@ You can pass options to the underlying Datamaps library to further customize you
 
 ### Changing the map data
 
-By default ichoropleth uses the Datamaps USA states data which is stored in a `TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  This works with our input data because our data frame has a column containing state abbreviations called 'State'. This column must contain state abbreviations and is used to link the tabular data to the map data via the code:
+By default ichoropleth uses the Datamaps USA states data which is stored in a `
+TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  This works with our input data because our data frame has a column containing state abbreviations called 'State'. This column must contain state abbreviations and is used to link the tabular data to the map data via the code:
 
 > ichoropleth(`vals ~ State`, data = indata, animate="year")
 
@@ -208,13 +209,14 @@ You can use a custom map with ichoropleth if: 1) the GeoJSON file is a url, 2) y
 mymap <- ichoropleth(vals ~ State, data = indata, animate="year")
 mymap$set(
   dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
-  scope = 'usa', # you need to define the scope if the name of the map in the json file is not "usa"
+  scope = 'us_states', # you need to define the scope if the name of the map in the topojson file is not "usa"
   geographyConfig = list(
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
       + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
     '</div>';  } !#"
   )
 )
+mymap
 mymap
 
 mymap$set(
