@@ -245,52 +245,10 @@ If you compare `map2.html` with `map3.html` you will see that map3.html allows y
 
 ### Map Customization 2
 
+Another customization we wanted to make was to change the States data to something totally different. Inspired by {} we wanted to try visualizing the data with States represented as squares instead of the actual state boundaries. This minimizes the differences do to the size.
 Below we show how to use a custom TopoJSON file with an layer name other than "usa". In this case youneed to specifiy the name of the map in the ichoropleth function. Below it is set to `map="us_states"`.  Because you are no longer using the defaults for the `usa` map you need to set the `scope` parameter and the `setProjection` paramater. The `scope` is the layer name in the TopoJSON file. The `setProjection` parameter refers to the parameters of the coordinate reference system used to locate the geometry on the surface of the earth. It's a complex topic and a complex configuration. See the Datamaps documentation referenced above for more insights.
 
 ```{r, eval=FALSE}
-map3 <- ichoropleth(vals ~ State, data = indata, animate="year", map="us_states")
-map3$set(
-  geographyConfig = list(
-    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo2.json",
-    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
-  ),
-  scope="us_states",
- 
-  setProjection = '#! function( element, options ) {
-    var projection, path;
-    projection = d3.geo.albersUsa()
-      .scale(element.offsetWidth)
-      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-    path = d3.geo.path().projection( projection );
-    return {path: path, projection: projection};
-  } !#'
-)
-map3
-map3$save('map3.html', cdn=TRUE)
-```
-
-```{r, eval=FALSE}
-map3 <- ichoropleth(vals ~ State, data = indata, animate="year", map="us_states")
-map3$set(
-  geographyConfig = list(
-    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo2.json",
-    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
-  ),
-  scope="us_states",
- 
-  setProjection = '#! function( element, options ) {
-    var projection, path;
-    projection = d3.geo.albersUsa()
-      .scale(element.offsetWidth)
-      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-    path = d3.geo.path().projection( projection );
-    return {path: path, projection: projection};
-  } !#'
-)
-map3
-map3$save('map3.html', cdn=TRUE)
-```
-
 map3 <- ichoropleth(vals ~ State, data = indata, animate="year")
 map3$set(
   geographyConfig = list(
@@ -301,11 +259,15 @@ map3$set(
   setProjection = '#! function( element, options ) {
     var projection, path;
     projection = d3.geo.albersUsa()
-      .scale(element.offsetWidth)
+      .scale(element.offsetWidth * 2)
       .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
     path = d3.geo.path().projection( projection );
     return {path: path, projection: projection};
   } !#'
 )
 map3
+map3$save('map3.html', cdn=TRUE)
+```
 
+
+map3$save('map3b.html', cdn=TRUE)
