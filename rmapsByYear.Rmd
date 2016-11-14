@@ -216,7 +216,7 @@ You can pass options to the underlying Datamaps library to further customize you
 
 One customization that you may want to make is to change the map data. We decided to do this for the following reason. We noticed that when using the default US states data Washington DC is so small you cannot hover over it and see its popup. Consequently we downloaded the states data and made DC a bit bigger so we could see the popup. 
 
-By default ichoropleth uses the Datamaps USA states data which is stored in a `TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  Each US State in the TopoJSON file has an `ID` property with the state abbreviaton, a `name` property with the full state name, and an geometry property `arcs` that identifies the boundary of each state. Together these data have the `layer name` *usa*. You can see this information by looking at the [Datamaps USA TopoJSON file](https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/usa.topo.json).
+By default ichoropleth uses the Datamaps USA states data which is stored in a `TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  Each US State in the TopoJSON file has an `ID` with the state abbreviaton, a `name` property with the full state name, and geometry `arcs` that identifies the boundary of each state. Together these data have the `layer name` *usa*. You can see this information by looking at the [Datamaps USA TopoJSON file](https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/usa.topo.json).
 
 <img src="images/datamaps_topo.png" />
 
@@ -231,7 +231,8 @@ Because we copied the Datamaps USA TopoJSON file (2) and (3) above are the same.
 map3 <- ichoropleth(vals ~ State, data = indata, animate="year")
 map3$set(
   geographyConfig = list(
-    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
+    #dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
   ) 
 )
@@ -290,4 +291,21 @@ map3
 map3$save('map3.html', cdn=TRUE)
 ```
 
+map3 <- ichoropleth(vals ~ State, data = indata, animate="year")
+map3$set(
+  geographyConfig = list(
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.id + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
+  ) ,
+  scope="state_squares",
+  setProjection = '#! function( element, options ) {
+    var projection, path;
+    projection = d3.geo.albersUsa()
+      .scale(element.offsetWidth)
+      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+    path = d3.geo.path().projection( projection );
+    return {path: path, projection: projection};
+  } !#'
+)
+map3
 
