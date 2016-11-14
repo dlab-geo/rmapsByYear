@@ -7,35 +7,36 @@ output: html_document
 
 # About
 
-This document shows two methods for creating time series maps of data for US States by year using the R statistical programming language. The two main R libraries we use to create these maps are:
-1. rmaps (http://rmaps.github.io/)
-2. ggplot2 (http://ggplot2.org)
+This tutorial shows two methods for creating time series maps of state-level data by year using the R statistical programming language. The two main R libraries we use to create these maps are **rMaps** (http://rmaps.github.io/) and **ggplot2** (http://ggplot2.org)
 
-## rmaps
-The R package rmaps provides a simple set of commands for creating animated, interactive choropleth maps. 
+## rMaps
+The R package `rMaps` provides a simple set of commands for creating animated, interactive choropleth maps. A choropleth map is one in which regions, such as states, are symbolized (e.g. colored) by data values for those regions. The output of rMaps can be saved to an HTML file that you can open in a web brower. This allows you to view a year's worth of data and advance through all years using a slider or button control on the map. Interactivity is added in the form of popup windows that can display. An example of an rMaps choropleth map is shown below.
 
-> A choropleth map is one in which areas are symbolized (e.g. colored) by data values.
+<p>
+<iframe src="./mymap2.html" seamless width="800px" height="500px" scrolling="no"></iframe>
+<p>
+For details on how to install rMaps and create choropleth maps see the [rMaps github site](https://github.com/ramnathv/rMaps). You can also read about the genesis of rMaps in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/) by its creator, Ramnath Vaidyanathan. The underlying funcitionality for creating these maps is provided by Datamaps (http://datamaps.github.io/), a javascript library. 
 
-The underlying funcitionality is provided by Datamaps (http://datamaps.github.io/), a javascript library. The  output of rmaps is an html file that contains the code and data to view and interact with the maps.  You can read about the genesis of rmaps in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/) by its creator, Ramnath Vaidyanathan.
+This tutorial provides additional rMaps examples and tips as well as custom code for extending the functionality of rMaps.
 
 ## ggplot
-The ggplot2 package is a widely used and extremely powerful R library for creating and customizing many different types of data plots including scatterplots, bar plots, and histograms, etc., as well as maps. We will use this library to create micromaps - a series of small maps for the same region, in this case US states, where the data vary along one facet, here time.
+The `ggplot2` package is a widely used and extremely powerful R library for creating and customizing many different types of data plots including scatterplots, bar plots, and histograms, etc., as well as maps. We will use this library to create micromaps - a series of small maps for the same region, in this case US states, where the data vary along one facet, here time. We include this section in the tutorial to provide an alternate   method for geographically visualizing many years of data. An example is shown below.
+
+<img src="images/top1.png" width="600px" />
+
 
 # Motivation
-The main reason we chose to use R as opposed to another software tool are that the rmaps and ggplot packages allow us to create the desired output with relatively few steps. Our input data is in a spreadsheet, not a geographic data file format like the shapefile, and most of our statistical analysis is done in MS Excel. R provides one line code for reading in these files and rmaps provides one line for creating the interactive annual map series. As with most data projects the vast majority of the effort is in preparing the data in the format needed to produce the desired output. Our work is not exception. But the analyst can do that processing in the software of their choice, be it excel, R or another tool.
+The main reason we chose to use R as opposed to another software tool are that the rMaps and ggplot packages allow us to create the desired output with relatively few steps. Our input data is in a spreadsheet, not a geographic data file format like the shapefile, and most of our statistical analysis is done in MS Excel. R provides one line code for reading in these files and rMaps provides one line for creating the interactive annual map series. As with most data projects the vast majority of the effort is in preparing the data in the format needed to produce the desired output. Our work is not exception. But the analyst can do that processing in the software of their choice, be it excel, R or another tool.
 
-Another reason we chose R was that we wanted a workflow that could be done locally rather than with an online tool (e.g. [CARTO](http://carto.com), [Shiny](http://www.shinyapps.io/), [Tableau](http://www.tableau.com) to keep our work and data relatively private until we are ready to share it. Moreover, we wanted to use a free software tool rather than pay for software when were were unsure of the outcome.
+Another benefit of using R was that we wanted a workflow that could be done locally rather than with an online tool (e.g. [CARTO](http://carto.com), [Shiny](http://www.shinyapps.io/), [Tableau](http://www.tableau.com) to keep our work and data relatively private until we are ready to share it. Moreover, we wanted to use a free software tool rather than pay for software when were were unsure of the outcome.
+
 
 # Data
 
-To follow along with this tutorial we use the *U.S. State-Level Income Inequality Data* provided by Mark W. Frank on the website: http://www.shsu.edu/eco_mwf/inequality.html
+To follow along with this tutorial we use the *U.S. State-Level Income Inequality Data* provided by Mark W. Frank on the website: http://www.shsu.edu/eco_mwf/inequality.html.The specific data file that we downloaded and preprocessed to create some sample data sets is: [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls). We have copied and created subsets of these data to facilitate this tutorial.
 
-The specific data file that we downloaded and preprocessed to create some sample data sets is: [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls).
-
-# Outcomes
-Below are some examples of our output. **TO BE ADDED!**
-
-# Getting started
+ 
+# RMaps
 
 ### Step 1. Install required R libraries
 ```{r results='hide', message=FALSE, warning=FALSE}
@@ -56,8 +57,11 @@ if ("rMaps" %in% rownames(installed.packages()) == FALSE ) {
 } else {
   print("Rmaps installed.")
 }
+```
 
- 
+
+### Step 2. Load the required R libraries
+```{r results='hide', message=FALSE, warning=FALSE}
 #--------------------
 # Load Libraries
 #--------------------
@@ -72,21 +76,24 @@ library(rCharts)
 library(rMaps)
 ```
 
-### Step 2. Read in data in the format required by *rmaps*
+
+### Step 3. Read in data in the format required by *rMaps*
 ```{r, echo=TRUE}
 # set working directory
 my_rmaps_directory <- "~/Documents/Dlab/consults/robin_e/rmapsByYear"
 setwd(my_rmaps_directory)
 
 # Identify the data to be mapped
-#in_data_file <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_long.csv"
-in_data_file <- "data/Frank_WTID_2013_top1_long_2000to2013.csv"
+in_data_file <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_long_2000to2013.csv"
 
 # Read in the data
 indata <- read.csv(in_data_file, stringsAsFactors = FALSE)
 
 # Take a look at the data
 head(indata)
+
+# Subset the data to make it more manageable for this tutorial
+indata <- subset(indata, year > 2000)
 
 # Range of data values
 summary(indata$vals)
@@ -95,42 +102,56 @@ summary(indata$vals)
 sort(unique(indata$year))
 ```
 
-### Step 3. Visualize the data using rmap ichoropleth function - default options
-<img src="images/ichoropleth_options.png" width="600px" />
+
+
+### Step 4. Create an rMap
+
+You can geographically visualize the data with the rMaps `ichoropleth` function. A simple call to this function using the basic paramaters is shown below. You can read this as "Create a choropleth map of the data in the `indata` data frame using the data in the `vals` column to symbolize the regions identified in the `State` column. For this basic functionality, rMaps requires map regions to be US states identified by their two letter abbreviations. These identifiers are used to access map data in the Datamaps package. The animate parameter identifies the column in the data frame that contains the year for each data observation.
 
 ```{r, eval=FALSE}
-#ichoropleth(Crime ~ State,
-#  data = datm2[,1:3],
-#  pal = 'PuRd',
-#  ncuts = 5,
-#  animate = 'Year' )
-#
 ichoropleth(vals ~ State, data = indata,  animate = 'year')
 ```
 
 <img src="images/ic_plot1.png" width="600px" />
 
 
+#### Save the output map to an HTML file
+You can save the ichoropleth map to an HTML file. This way you can share the map by emailing it or posting it on a website or simply by displaying it locally in the web browser on your computer.
 
-#### Vary the color palatte (or pal) using one of the options provided by the rColorBrewer package
+```{r, eval=FALSE}
+map1 <- ichoropleth(vals ~ State, data = indata,  animate = 'year')
+map1$save('map1.html', cdn=TRUE)
+```
+
+Above, setting the value `cdn=TRUE` embeds references to required javascript libraries as URLs inside the output HTML file rather than needing to include the code for those libraries in our HTML file. Bottom line - this keeps the file size smaller.
+
+If you navigate to your working directory you can double-click on your HTML file (above named `map1.html`) to view your ichoropleth map.
+
+
+
+#### Setting Map Colors
+
+You can vary the color palatte (or pal) by using one of the named options provided by the `rColorBrewer` package.
 ```{r, eval=FALSE}
 display.brewer.all()
 ```
 <img src="images/brewer_pals.png" width="600px" />
 
+  
+In the image above there are three families of color palettes:
 
-You can see in the resultant image that there are three families of color palettes:
-1. sequentional, eg YlOrRd, used to highlight numeric values as they increase/decrease
-2. categorical, eg., set3, used to symbolize different categories of data
-3. divergent, eg. Spectral, used to identify deviations around the mean values
+1. `sequentional`, eg YlOrRd, which can be used to highlight numeric values as they increase or decrease
+2. `categorical`, eg., Set3, used to symbolize different categories of data
+3. `divergent`, eg. Spectral, used to identify deviations around the mean values
 
-For these data a sequential or divergent color palette would work best. Let's try YlOrRd (yellow-orange-red)
+For these data a sequential or divergent color palette would work best. Let's try YlOrRd (yellow-orange-red).
 
 ```{r, eval=FALSE}
 ichoropleth(vals ~ State, data = indata,  animate = 'year', pal='YlOrRd')
 ```
 <img src="images/ic_plot2.png" width="600px" />
 
+  
 You can add more bins for symbolizing the data. With R color brewer sequential palettes you can use up to 9, with divergent palettes 11. The recommended number is between 3-7 and the default for ichoropleth is 5. See ?brewer.pal for details.
 
 ```{r, eval=FALSE}
@@ -165,78 +186,108 @@ For more options to the ichoropleth function see: http://rmaps.github.io/blog/po
 https://github.com/ramnathv/rMaps.
 
 
-## Step 4. Add Custom Popups to the Map
+### Step 5. Add Popups to the Map
 
 By default, ichoropleth displays the full name of a state in a popup window when you move your mouse and hover over a state. You can customize the content of the popup to display the data value for a state for the given year. This is helpful if you do not want to display a legend or if you want to convey additional information.
 
 
 ```{r, eval=FALSE}
-mymap <- ichoropleth(vals ~ State, data = indata, animate="year")
-mymap$set(
+map2 <- ichoropleth(vals ~ State, data = indata, animate="year")
+map2$set(
   geographyConfig = list(
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
       + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
     '</div>';  } !#"
   )
 )
-mymap
+map2
+map2$save('map2.html', cdn=TRUE)
 ```
 
 
-In the example above we save the ichoropleth map to the variable *mymap*. We then pass additional customizations to *Datamaps* that create a custom popup.  The *popupTemplate* is a function that passes in the name of the the state (geo.properties.name), the year for the data (data.year) and the data value for the state for that year (data.vals).  The values for data.year and data.vals come from the data frame that is used to create the map, in this case **indata**. In addition, we add to the popup a percent sign at the end of the data value using the code *' % '*.  The code *'\<br\>'* adds a line break between the state name and year and the data value.  You can pass any column that is in the input data frame (here indata) to the popupTemplate. For example, you can add a column called "popup_text" to your input data frame and populated it with a nicely formatted version of your data values you can then reference in the popupTemplate as *data.popup_text*.
+In the example above we save the ichoropleth map to the variable `map2`. We then pass additional customizations to *Datamaps* that create a custom popup.  The `popupTemplate` is a function that identifies the name of each state (geo.properties.name), the year for the data (data.year) and the data value for the state for that year (data.vals).  The values for data.year and data.vals come from the data frame that is used to create the map, in this case `indata`. In addition, we add to the popup a percent sign at the end of the data value using the code `'%'`.  The code `'\<br\>'` adds a line break between the state name and year and the data value.  You can pass any column that is in the input data frame (here indata) to the popupTemplate. For example, you can add a column called `popup_text` to your input data frame and populated it with a nicely formatted version of your data values you can then reference in the popupTemplate as `data.popup_text`.
 
 
 ## Step 5. Datamaps Customizations
 
-You can pass options to the underlying Datamaps library to further customize your maps. Refer to the Datamaps [github.io site] (http://datamaps.github.io/) and [custom maps](https://github.com/markmarkoh/datamaps/blob/master/README.md#using-custom-maps) web page for details. Note that those pages show how to make Datamaps changes to javascript code. From within R you can set those values using the syntax shown in the code block above and summarized below. However, the mapping of customizations from Datamaps to ichoropleth can be complex.
-
-1. save ichoropleth map: mymap <- ichoropleth(vals ~ State, data = indata, animate="year")
-2. use the mymap.set(...) syntax to make the customizations shown in the Datamaps documentation.
+You can pass options to the underlying Datamaps library to further customize your maps. Refer to the [Datamaps website](http://datamaps.github.io/) and [custom maps](https://github.com/markmarkoh/datamaps/) web page for details. Those pages show how to make Datamaps changes to javascript code. However, implementing Datamaps customizations in rMaps can be complex. The basic method for implementing Datamaps changes is with the `map.set()` function. We used that above to create popups for map2.
 
 ### Changing the map data
 
-By default ichoropleth uses the Datamaps USA states data which is stored in a `
-TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  This works with our input data because our data frame has a column containing state abbreviations called 'State'. This column must contain state abbreviations and is used to link the tabular data to the map data via the code:
+One customization that you may want to make is to change the map data. We decided to do this for the following reason. We noticed that when using the default US states data Washington DC is so small you cannot hover over it and see its popup. Consequently we downloaded the states data and made DC a bit bigger so we could see the popup. 
 
-> ichoropleth(`vals ~ State`, data = indata, animate="year")
+By default ichoropleth uses the Datamaps USA states data which is stored in a `TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  Each US State in the TopoJSON file has an `ID` property with the state abbreviaton, a `name` property with the full state name, and an geometry property `arcs` that identifies the boundary of each state. Together these data have the `layer name` *usa*. You can see this information by looking at the [Datamaps USA TopoJSON file](https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/usa.topo.json).
 
-Another reference to the Datamaps USA states data is in the `popupTemplate` reference to `geo.properties.name`. Here, `geo` is a reference to the [GeoJSON](https://en.wikipedia.org/wiki/GeoJSON) file that contains the geometry delineating US states and `properties.name` refers to the full state names.
-
-The name of states data in the TopoJSON file is `usa`. If you look inside a GeoJSON file you can see this name in the first line of the file, right after the word "objects":
-
-<img src="images/ic_geojson.png" width="600px" />
+<img src="images/datamaps_topo.png" />
 
 You can use a custom map with ichoropleth if the following conditions are true.
 1.  The geographic data are in a TopoJSON (not GeoJSON) file and you can access that file via a URL, 
-2.  You can identify the name of the data in the GeoJson file.  For example take a look at this customized [GeoJSON file](https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json).  If the name is not `usa` it needs to be set using the `scope` Datamaps variable.
-3. The id of each polygon in the TopoJSON file is a state abbrevation matching the values in the R data frame (same format, same case).
+2.  You can identify the `layer name` of the data in the TopoJson file.  You can see above the layer name `usa` right after the keyword `objects`. If the name is not `usa` it needs to be set using the `scope` Datamaps variable.
+3. The id of each polygon in the TopoJSON file is has a corresponding value in the R data frame. Thus far our rMaps have used state abbrevation in the States column.
+
+Because we copied the Datamaps USA TopoJSON file (2) and (3) above are the same. We can just add a `dataUrl` parameter to access our custom TopoJSON file.
 
 ```{r, eval=FALSE}
-mymap2 <- ichoropleth(vals ~ State, data = indata, animate="year")
-mymap2$set(
-  geographyConfig = list(
-    dataUrl = "http://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
-    scope = "us_states",
-    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +   '</div>';  } !#"
-  )
-)
-mymap2
-
-
-mymap$set(
+map3 <- ichoropleth(vals ~ State, data = indata, animate="year")
+map3$set(
   geographyConfig = list(
     dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
-    scope = 'usa', # you need to define the scope if the name of the map in the json file is not "usa"
-    borderColor= map_border_color,
-    popupTemplate = "#! function(geo, data){
-    return '<div class=\"hoverinfo\"><strong>'+ geo.properties.name + ' ' + data.year + '</strong>' + '<br>' + data.data_label + data.popup_data + '</div>';  } !#"
-  )
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
+  ) 
 )
- 
+map3
+map3$save('map3.html', cdn=TRUE)
 ```
-Below we show
+
+If you compare `map2.html` with `map3.html` you will see that map3.html allows you to view the popup for Washington D.C!
+
+
+### Map Customization 2
+
+Below we show how to use a custom TopoJSON file with an layer name other than "usa". In this case youneed to specifiy the name of the map in the ichoropleth function. Below it is set to `map="us_states"`.  Because you are no longer using the defaults for the `usa` map you need to set the `scope` parameter and the `setProjection` paramater. The `scope` is the layer name in the TopoJSON file. The `setProjection` parameter refers to the parameters of the coordinate reference system used to locate the geometry on the surface of the earth. It's a complex topic and a complex configuration. See the Datamaps documentation referenced above for more insights.
 
 ```{r, eval=FALSE}
+map3 <- ichoropleth(vals ~ State, data = indata, animate="year", map="us_states")
+map3$set(
+  geographyConfig = list(
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo2.json",
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
+  ),
+  scope="us_states",
+ 
+  setProjection = '#! function( element, options ) {
+    var projection, path;
+    projection = d3.geo.albersUsa()
+      .scale(element.offsetWidth)
+      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+    path = d3.geo.path().projection( projection );
+    return {path: path, projection: projection};
+  } !#'
+)
+map3
+map3$save('map3.html', cdn=TRUE)
+```
+
+```{r, eval=FALSE}
+map3 <- ichoropleth(vals ~ State, data = indata, animate="year", map="us_states")
+map3$set(
+  geographyConfig = list(
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo2.json",
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
+  ),
+  scope="us_states",
+ 
+  setProjection = '#! function( element, options ) {
+    var projection, path;
+    projection = d3.geo.albersUsa()
+      .scale(element.offsetWidth)
+      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+    path = d3.geo.path().projection( projection );
+    return {path: path, projection: projection};
+  } !#'
+)
+map3
+map3$save('map3.html', cdn=TRUE)
 ```
 
 
