@@ -242,32 +242,62 @@ map3$save('map3.html', cdn=TRUE)
 
 If you compare `map2.html` with `map3.html` you will see that map3.html allows you to view the popup for Washington D.C!
 
+### Mapping States as Squares
 
-### Map Customization 2
+With a completely different TopoJSON file you need to make a few more customizations. This [R-bloggers post](https://www.r-bloggers.com/rmaps-mexico-map/) walks you through the details. Inspired by this [Obesity map series](http://flowingdata.com/2016/09/26/the-spread-of-obesity/) we wanted to try visualizing the data with States represented as squares instead of the actual state boundaries. This technique minimizes the differences do to the land area yet retains locational familiarity. 
 
-Another customization we wanted to make was to change the States data to something totally different. Inspired by {} we wanted to try visualizing the data with States represented as squares instead of the actual state boundaries. This minimizes the differences do to the size.
-Below we show how to use a custom TopoJSON file with an layer name other than "usa". In this case youneed to specifiy the name of the map in the ichoropleth function. Below it is set to `map="us_states"`.  Because you are no longer using the defaults for the `usa` map you need to set the `scope` parameter and the `setProjection` paramater. The `scope` is the layer name in the TopoJSON file. The `setProjection` parameter refers to the parameters of the coordinate reference system used to locate the geometry on the surface of the earth. It's a complex topic and a complex configuration. See the Datamaps documentation referenced above for more insights.
+We downloaded this state squares [GeoJSON file](https://raw.githubusercontent.com/geobabbler/us-state-squares/master/state_squares.geojson) from Bill Dollin's GitHub site (referenced in [blog post by Kyle Walker](http://rpubs.com/walkerke/obesity_squares)) and converted it to a TopoJSON file. By looking at the data in this file we could see that the layer name is `state_squares`. 
+Kyle Walker's blog post also recommends displaying the state squares using an `equirectangular` map projection. Setting the projection parameters in rMaps/Datamaps is very complex even when you know about map projections & coordinate reference systems, topics beyond the scope of this tutorial. Folks without this knowledge can use rMaps and Datamaps to create great maps. But to go beyound the defaults map data requires learning about geographic data along with some experimentation (i.e. cut, paste & edit until it works). Fortunately the [map example](http://geobabbler.github.io/assets/demos/us-states-squares/example/) in Bill Dollin's github site provides the needed projection parameters.
+
+
+Below we show how to use the states squares data in a custom rMap. In this case we specifiy the name of the map layer by setting 'scope=state_squares'. The `setProjection` parameter refers to the parameters of the map projection used to locate the map data in geographic space. Additionally, in the popup we change the variable used to map the state name to `geo.id`.
 
 ```{r, eval=FALSE}
-map3 <- ichoropleth(vals ~ State, data = indata, animate="year")
-map3$set(
-  geographyConfig = list(
+map4 <- ichoropleth(vals ~ State, data = indata, animate="year")
+map4$set(
+   geographyConfig = list(
     dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.id + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
   ) ,
   scope="state_squares",
   setProjection = '#! function( element, options ) {
     var projection, path;
-    projection = d3.geo.albersUsa()
-      .scale(element.offsetWidth * 2)
+    projection = d3.geo.equirectangular()
+      .scale(2000)
+      .center([-96,41])
       .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
     path = d3.geo.path().projection( projection );
     return {path: path, projection: projection};
   } !#'
 )
-map3
-map3$save('map3.html', cdn=TRUE)
+map4
+map4$save('map4.html', cdn=TRUE)
 ```
 
 
-map3$save('map3b.html', cdn=TRUE)
+That works pretty well, but the squares spread out the country in too elongated a fashion. Let's try the `mercator` projection which will give a North-South stretch to the map data. Consquently we set the map hieght to `600` pixels. The default height is 500 which cuts off some of the data. Try changing it.
+
+```{r, eval=FALSE}
+map5 <- ichoropleth(vals ~ State, data = indata, animate="year")
+map5$set(
+  geographyConfig = list(
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.id + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
+  ) ,
+  scope="state_squares",
+  height=600,
+  setProjection = '#! function( element, options ) {
+    var projection, path;
+    projection = d3.geo.mercator()
+      .scale(2000)
+      .center([-96,41])
+      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+    path = d3.geo.path().projection( projection );
+    return {path: path, projection: projection};
+  } !#'
+)
+map5
+mapt$save('map5.html', cdn=TRUE)
+
+
+
