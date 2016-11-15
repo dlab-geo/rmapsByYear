@@ -36,7 +36,7 @@ Another benefit of using R was that we wanted a workflow that could be done loca
 
 # Data
 
-To follow along with this tutorial we use the *U.S. State-Level Income Inequality Data* provided by Mark W. Frank on the website: http://www.shsu.edu/eco_mwf/inequality.html.The specific data file that we downloaded and preprocessed to create some sample data sets is: [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls). We have copied and created subsets of these data to facilitate this tutorial.
+To follow along with this tutorial we use the *U.S. State-Level Income Inequality Data* provided by Mark W. Frank on the website: (http://www.shsu.edu/eco_mwf/inequality.html). The specific data file that we downloaded and preprocessed to create some sample data sets is: [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls). We have copied and created subsets of these data to facilitate this tutorial.
 
 
 ## Tutorial Data
