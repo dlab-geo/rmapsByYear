@@ -17,7 +17,7 @@ This tutorial shows two methods for creating time series maps of state-level dat
 The R package `rMaps` provides a simple set of commands for creating animated, interactive choropleth maps. A choropleth map is one in which regions, such as states, are symbolized (e.g. colored) by data values for those regions. The output of rMaps can be saved to an HTML file that you can open in a web brower. This allows you to view a year's worth of data and advance through all years using a slider or button control on the map. Interactivity is added in the form of popup windows that can display. An example of an rMaps choropleth map is shown below.
 
 <p>
-<iframe src="./mymap2.html" seamless width="800px" height="500px" scrolling="no"></iframe>
+<iframe src="html/map1.html" seamless width="750px" height="500px" scrolling="no"></iframe>
 <p>
 For details on how to install rMaps and create choropleth maps see the [rMaps github site](https://github.com/ramnathv/rMaps). You can also read about the genesis of rMaps in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/) by its creator, Ramnath Vaidyanathan. The underlying funcitionality for creating these maps is provided by Datamaps (http://datamaps.github.io/), a javascript library. 
 
@@ -40,9 +40,11 @@ Another benefit of using R was that we wanted a workflow that could be done loca
 To follow along with this tutorial we use the *U.S. State-Level Income Inequality Data* provided by Mark W. Frank on the website: http://www.shsu.edu/eco_mwf/inequality.html.The specific data file that we downloaded and preprocessed to create some sample data sets is: [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls). We have copied and created subsets of these data to facilitate this tutorial.
 
  
-# RMaps
+# Creating RMaps
 
-### Step 1. Install required R libraries
+## Setup
+
+### Install required R libraries
 ```{r results='hide', message=FALSE, warning=FALSE}
 #
 # Install helper packages
@@ -72,7 +74,7 @@ if ("rMaps" %in% rownames(installed.packages()) == FALSE ) {
 ```
 
 
-### Step 2. Load the required R libraries
+### Load the required R libraries
 ```{r results='hide', message=FALSE, warning=FALSE}
 #--------------------
 # Load Libraries
@@ -87,7 +89,7 @@ library(rMaps)
 ```
 
 
-### Step 3. Read in data in the format required by *rMaps*
+### Explore the Data
 ```{r, echo=TRUE}
 # set working directory
 my_rmaps_directory <- "~/Documents/Dlab/dlab_workshops/rmapsByYear"
@@ -113,10 +115,13 @@ sort(unique(indata$year))
 
 
 
-### Step 4. Create an rMap
+## Create a Basic rMap
 
 You can geographically visualize the data with the rMaps `ichoropleth` function. A simple call to this function using the basic paramaters is shown below. You can read this as "Create a choropleth map of the data in the `indata` data frame using the data in the `vals` column to symbolize the regions identified in the `State` column. For this basic functionality, rMaps requires map regions to be US states identified by their two letter abbreviations. These identifiers are used to access map data in the Datamaps package. The animate parameter identifies the column in the data frame that contains the year for each data observation.
 
+<img src="images/ichoropleth.png" />
+
+### Our first ichoropleth rMap
 ```{r, eval=FALSE}
 ichoropleth(vals ~ State, data = indata,  animate = 'year')
 ```
@@ -124,23 +129,37 @@ ichoropleth(vals ~ State, data = indata,  animate = 'year')
 <img src="images/ic_plot1.png" width="600px" />
 
 
-#### Save the output map to an HTML file
+### Save to an HTML file
 You can save the ichoropleth map to an HTML file. This way you can share the map by emailing it or posting it on a website or simply by displaying it locally in the web browser on your computer.
 
 ```{r, eval=FALSE}
 map1 <- ichoropleth(vals ~ State, data = indata,  animate = 'year')
+
+# display the map
+map1
+
+# save the map
 map1$save('map1.html', cdn=TRUE)
 ```
 
 Above, setting the value `cdn=TRUE` embeds references to required javascript libraries as URLs inside the output HTML file rather than needing to include the code for those libraries in our HTML file. Bottom line - this keeps the file size smaller.
 
-If you navigate to your working directory you can double-click on your HTML file (above named `map1.html`) to view your ichoropleth map.
+If you navigate to your working directory you can double-click on your HTML file (above named `map1.html`) to view your ichoropleth map.  
 
-#### Challenge
-```
-Create an ichoropleth map of a subset of the years of data, from 200
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
 
-#### Setting Map Colors
+###  **CHALLENGE 1**
+
+1. Create an ichoropleth map and save it to HTML. Then open it in your web browser.
+2. Take a look at the map of 2002 data. One state is not like the other. Which state is it? Can you look at the map and the data frame to figure out why?  
+
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+
+## Customizing an rMap
+
+### Setting Map Colors
 
 You can vary the color palatte (or pal) by using one of the named options provided by the `rColorBrewer` package.
 ```{r, eval=FALSE}
@@ -162,7 +181,14 @@ ichoropleth(vals ~ State, data = indata,  animate = 'year', pal='YlOrRd')
 ```
 <img src="images/ic_plot2.png" width="600px" />
 
-  
+By default, the ichoropleth function uses the `quantile` function to create 5 bins (or quintiles) into which the mapped data values are classified. The syntax for that command is shown below. A unique color is assigned to each bin. You can see the range of values included in each bin and the color assigned to it in the legend. Note, in the legend an open parantheses indicates that the data value is not included in the bin while a bracket indicates it is.
+
+```{r}
+quantile(indata$vals, seq(0, 1, 1/5))
+     
+```
+
+
 You can add more bins for symbolizing the data. With R color brewer sequential palettes you can use up to 9, with divergent palettes 11. The recommended number is between 3-7 and the default for ichoropleth is 5. See ?brewer.pal for details.
 
 ```{r, eval=FALSE}
@@ -186,28 +212,44 @@ Customize the map style
 ichoropleth(vals ~ State, data = subset(indata, year == 2005))
 
 # Map a subset of years
-ichoropleth(vals ~ State, data = subset(indata, year > 2005), animate="year")
+ichoropleth(vals ~ State, data = subset(indata, year < 2008), animate="year")
 
 # Add a Play button to advance through the year-levels automatically
-ichoropleth(vals ~ State, data = subset(indata, year > 2005), animate="year", play=TRUE)
+ichoropleth(vals ~ State, data = subset(indata, year < 2008), animate="year", play=TRUE)
 ```
 
 
 For more options to the ichoropleth function see: http://rmaps.github.io/blog/posts/animated-choropleths/ and the GitHub page for rmaps at: 
 https://github.com/ramnathv/rMaps.
 
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
 
-### Step 5. Add Popups to the Map
+
+###  **CHALLENGE 2**
+
+1. Create an ichoropleth map of the data using a divergent color palette and 7 data bins.
+2. Make a map without the State abbreviations displayed on the map.
+3. Create a map of a subset of the years of data, from 2005 - 20009.
+
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+
+
+## Adding Popups to the Map
 
 By default, ichoropleth displays the full name of a state in a popup window when you move your mouse and hover over a state. You can customize the content of the popup to display the data value for a state for the given year. This is helpful if you do not want to display a legend or if you want to convey additional information.
 
 
 ```{r, eval=FALSE}
+# create the map
 map2 <- ichoropleth(vals ~ State, data = indata, animate="year")
+
+# customize the map by adding a popup
 map2$set(
   geographyConfig = list(
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
-      + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
+      + geo.properties.name + ' ' + data.year +  '<br>' +  data.vals + '%' +  
     '</div>';  } !#"
   )
 )
@@ -220,56 +262,117 @@ map2$save('map2.html', cdn=TRUE)
 ```
 
 
-In the example above we save the ichoropleth map to the variable `map2`. We then pass additional customizations to *Datamaps* that create a custom popup.  The `popupTemplate` is a function that identifies the name of each state (geo.properties.name), the year for the data (data.year) and the data value for the state for that year (data.vals).  The values for data.year and data.vals come from the data frame that is used to create the map, in this case `indata`. In addition, we add to the popup a percent sign at the end of the data value using the code `'%'`.  The code `'\<br\>'` adds a line break between the state name and year and the data value.  You can pass any column that is in the input data frame (here indata) to the popupTemplate. For example, you can add a column called `popup_text` to your input data frame and populated it with a nicely formatted version of your data values you can then reference in the popupTemplate as `data.popup_text`.
+In the example above we save the ichoropleth map to the variable `map2`. We then pass additional customizations to *Datamaps* that create a custom popup.  The `popupTemplate` is a function that identifies the name of each state (geo.properties.name), the year for the data (data.year) and the data value for the state for that year (data.vals).  The values for data.year and data.vals come from the data frame that is used to create the map, in this case `indata`. In addition, we add to the popup a percent sign at the end of the data value using the code `+ '%' + `.  The code `'\<br\>'` adds a line break between the state name and year and the data value.  You can pass any column that is in the input data frame (here indata) to the popupTemplate. For example, you can add a column called `popup_text` to your input data frame and populated it with a nicely formatted version of your data values you can then reference in the popupTemplate as `data.popup_text`.  To really get fancy with popup customizations you need to know a little HTML syntax.  
+
+> **Important**: When you add popup data you significantly increase the size of the output map. The popup contents may not display properly in the RStudio viewer (may not update). So, save your maps as HTML files and check the output map in a web browser rather than in RStudio.
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+### **CHALLENGE 3**
+
+1. Make a change to the popup text used for map2. Instead of displaying `+ data.vals + "%"` try putting the string "Percent:" in front of the data.vals and removing the trailing percent sign.
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
 
 
-## Step 5. Datamaps Customizations
+## Advanced Customizations
 
 You can pass options to the underlying Datamaps library to further customize your maps. Refer to the [Datamaps website](http://datamaps.github.io/) and [custom maps](https://github.com/markmarkoh/datamaps/) web page for details. Those pages show how to make Datamaps changes to javascript code. However, implementing Datamaps customizations in rMaps can be complex. The basic method for implementing Datamaps changes is with the `map.set()` function. We used that above to create popups for map2.
 
-### Changing the map data
-
-One customization that you may want to make is to change the map data. We decided to do this for the following reason. We noticed that when using the default US states data Washington DC is so small you cannot hover over it and see its popup. Consequently we downloaded the states data and made DC a bit bigger so we could see the popup. 
-
-By default ichoropleth uses the Datamaps USA states data which is stored in a `TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  Each US State in the TopoJSON file has an `ID` with the state abbreviaton, a `name` property with the full state name, and geometry `arcs` that identifies the boundary of each state. Together these data have the `layer name` *usa*. You can see this information by looking at the [Datamaps USA TopoJSON file](https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/usa.topo.json).
-
-<img src="images/datamaps_topo.png" />
-
-You can use a custom map with ichoropleth if the following conditions are true.
-1.  The geographic data are in a TopoJSON (not GeoJSON) file and you can access that file via a URL, 
-2.  You can identify the `layer name` of the data in the TopoJson file.  You can see above the layer name `usa` right after the keyword `objects`. If the name is not `usa` it needs to be set using the `scope` Datamaps variable.
-3. The id of each polygon in the TopoJSON file is has a corresponding value in the R data frame. Thus far our rMaps have used state abbrevation in the States column.
-
-Because we copied the Datamaps USA TopoJSON file (2) and (3) above are the same. We can just add a `dataUrl` parameter to access our custom TopoJSON file.
+For example, the map below changes the `borderWidth` for each state to **3** and the `borderColor` to **black**.
 
 ```{r, eval=FALSE}
+
+# create the map
 map3 <- ichoropleth(vals ~ State, data = indata, animate="year")
+
+# customize the map
 map3$set(
   geographyConfig = list(
-    #dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
-    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
-    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
-  ) 
+    borderWidth=3,
+    borderColor='black',
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
+      + geo.properties.name + ' ' + data.year +  '<br>' +  data.vals + '%' +  
+    '</div>';  } !#"
+  )
 )
-map3
+
+# display the map
+map3 
+
+# save the map
 map3$save('map3.html', cdn=TRUE)
 ```
 
-If you compare `map2.html` with `map3.html` you will see that map3.html allows you to view the popup for Washington D.C!
+> **Important** Commas are important in the map$set() function. You must have a comma after each element in a list but you cannot have a trailing comma at the end.
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+###  **CHALLENGE 4**
+
+1. Go to the Datamaps [custom maps](https://github.com/markmarkoh/datamaps/) web page, and scroll down to the section *Configuration options and default settings*. 
+Alter the code for map3 above to set the highlight border color when you mouse over a state to yellow.
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+
+
+### Using Different Map Data
+
+One customization that you may want to make is to change the map data. We decided to do this when we realized that Washington DC is so small on the default map that you cannot hover over it and see its popup. Consequently, we downloaded the states data and made the region for DC a bit bigger so we could see the popup and thus the data value. 
+
+By default ichoropleth uses the Datamaps USA states data which is stored in a `TopoJSON` file, which is a compressed variant of a [GeoJSON file](https://en.wikipedia.org/wiki/GeoJSON#TopoJSON).  Each US State in the TopoJSON file has an `ID` with the state abbreviaton, a `name` property with the full state name, and geometry `arcs` that identifies the boundary of each state. Together these data have the `layer name` *usa*. You can see this information by looking at the [Datamaps USA TopoJSON file](https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/usa.topo.json).
+
+<img src="images/datamaps_topo.png" style="border:1px solid black"/>
+
+You can use a custom map with ichoropleth if the following conditions are true.
+
+1. The geographic data are in a TopoJSON (not GeoJSON) file and you can access that file via a URL, 
+2. You can identify the `layer name` of the data in the TopoJson file.  You can see above the layer name `usa` right after the keyword `objects`. If the name is not `usa` it needs to be set using the `scope`variable.
+3. The id of each polygon in the TopoJSON file is has a corresponding value in the R data frame. Thus far our rMaps have used state abbrevation in the States column.
+
+Because we copied the Datamaps USA TopoJSON file and edited it, (2) and (3) above are the same. We can just add a `dataUrl` parameter to access our customized TopoJSON file.
+
+```{r, eval=FALSE}
+
+# create the map
+map4 <- ichoropleth(vals ~ State, data = indata, animate="year")
+
+# customize the map
+map4$set(
+  geographyConfig = list(
+    dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/usa_with_bigger_DC_topo.json",
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
+  ) 
+)
+
+# display the map
+map4
+
+# save the map
+map4$save('map4.html', cdn=TRUE)
+```
+
+If you compare `map2.html` with `map4.html` in a web browser (not in RStudio!) you will see that map4.html allows you to view the popup for Washington D.C!
+
 
 ### Mapping States as Squares
 
-With a completely different TopoJSON file you need to make a few more customizations. This [R-bloggers post](https://www.r-bloggers.com/rmaps-mexico-map/) walks you through the details. Inspired by this [Obesity map series](http://flowingdata.com/2016/09/26/the-spread-of-obesity/) we wanted to try visualizing the data with States represented as squares instead of the actual state boundaries. This technique minimizes the differences do to the land area yet retains locational familiarity. 
+With a completely different TopoJSON file you need to make a few more customizations. This [R-bloggers post](https://www.r-bloggers.com/rmaps-mexico-map/) walks you through the details. Inspired by this [Obesity map series](http://flowingdata.com/2016/09/26/the-spread-of-obesity/) we wanted to try visualizing the data with States represented as squares instead of the actual state boundaries. This technique minimizes the differences due to land area yet retains locational familiarity. 
 
 We downloaded this state squares [GeoJSON file](https://raw.githubusercontent.com/geobabbler/us-state-squares/master/state_squares.geojson) from Bill Dollin's GitHub site (referenced in [blog post by Kyle Walker](http://rpubs.com/walkerke/obesity_squares)) and converted it to a TopoJSON file. By looking at the data in this file we could see that the layer name is `state_squares`. 
-Kyle Walker's blog post also recommends displaying the state squares using an `equirectangular` map projection. Setting the projection parameters in rMaps/Datamaps is very complex even when you know about map projections & coordinate reference systems, topics beyond the scope of this tutorial. Folks without this knowledge can use rMaps and Datamaps to create great maps. But to go beyound the defaults map data requires learning about geographic data along with some experimentation (i.e. cut, paste & edit until it works). Fortunately the [map example](http://geobabbler.github.io/assets/demos/us-states-squares/example/) in Bill Dollin's github site provides the needed projection parameters.
+Kyle Walker's blog post recommends displaying the state squares using an `equirectangular` map projection. Setting the projection parameters in rMaps/Datamaps is very complex even when you know about map projections & coordinate reference systems, topics beyond the scope of this tutorial. Folks without this knowledge can still use rMaps and Datamaps to create great maps. But to go beyond the defaults and work with custom maps requires learning about geographic data along with some experimentation (i.e. cut, paste & edit until it works). Fortunately the [map example](http://geobabbler.github.io/assets/demos/us-states-squares/example/) in Bill Dollin's github site provides the needed projection parameters for the state squares data.
 
 
-Below we show how to use the states squares data in a custom rMap. In this case we specifiy the name of the map layer by setting 'scope=state_squares'. The `setProjection` parameter refers to the parameters of the map projection used to locate the map data in geographic space. Additionally, in the popup we change the variable used to map the state name to `geo.id`.
+Below we show how to use the states squares data in a custom rMap. In this case we specifiy the name of the map layer by setting `scope=state_squares`. The `setProjection` parameter refers to the parameters of the map projection used to locate the map data in geographic space. Additionally, in the popup we change the variable used to map the state name to `geo.id`.
 
 ```{r, eval=FALSE}
-map4 <- ichoropleth(vals ~ State, data = indata, animate="year")
-map4$set(
+
+# create the map
+map5 <- ichoropleth(vals ~ State, data = indata, animate="year")
+
+# customize the map
+map5$set(
    geographyConfig = list(
     dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.id + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
@@ -285,16 +388,20 @@ map4$set(
     return {path: path, projection: projection};
   } !#'
 )
-map4
-map4$save('map4.html', cdn=TRUE)
+
+# display the map
+map5
+
+# save the map
+map$save('map5.html', cdn=TRUE)
 ```
 
 
-That works pretty well, but the resultant map stretches the country too much in an east-west direction. Let's try the `mercator` projection which will give a North-South stretch to the mapped squares. Consquently, the default height of the map, which is 500 pixels, cuts off some of the data. We can address that by setting the map hieght to `600` pixels. Feel free to experiment with different height values.
+That works pretty well, but the equirectangular map projection stretches the country too much in an east-west direction. Let's try the `mercator` projection which will give a North-South stretch to the mapped squares. Consquently, the default height of the map, which is 500 pixels, cuts off some of the data. We can address that by setting the map hieght to `600` pixels. Feel free to experiment with different height values.
 
 ```{r, eval=FALSE}
-map5 <- ichoropleth(vals ~ State, data = indata, animate="year")
-map5$set(
+map6 <- ichoropleth(vals ~ State, data = indata, animate="year")
+map6$set(
   geographyConfig = list(
     dataUrl = "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_squares_topo.json",
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' + geo.id + ' ' + data.year +  '<br>' +  + data.vals + '%' +  '</div>';  } !#"
@@ -311,150 +418,37 @@ map5$set(
     return {path: path, projection: projection};
   } !#'
 )
-map5
-mapt$save('map5.html', cdn=TRUE)
-
-
-
-## Sharing your rMap
-http://rpubs.com/pfrontiera/226917
+map6
+map6$save('map6.html', cdn=TRUE)
 ```
 
 
-## More customizations
+# Extending rMaps
 
-The ichropleth function is a great convenience wrapper around Datamaps. It doesn't try to do too much. It does one thing very well - creating an annual map series for state-level data. To do more, you can write create maps directly with Datamaps. Code examples for this are shown in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/).
+The ichropleth function is a great convenience wrapper around Datamaps. It doesn't try to do too much. It does one thing very well - creating an annual map series for state-level data. To do more, you can write code to create maps directly with the `rCharts` and `Datamaps` packages. Code examples for getting started with this are shown in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/).
 
+Another option is to extend the code for ichoropleth to make it a bit more customizable. We did this by creating the function `ichoropleth2` which is in the R script file `ichoropleth2.R`. To access this function source the R script.
 
 ```{r, eval=FALSE}
-ic3 <- function(x, data, pal = "Blues", nodata_color="white", nodata_label="NA", ncuts = 5, animate = NULL, play = F, map = 'usa', legend = TRUE, labels = TRUE, include_lowest=FALSE, my_breaks = NULL, my_title='', ...){
-
-  d <- Datamaps$new()
-  fml = lattice::latticeParseFormula(x, data = data)
-
-  
-  if (!is.null(my_breaks)) {
-      myfillkey <- cut(fml$left, breaks = my_breaks, ordered_result=TRUE, include.lowest=include_lowest)
-  } else {
-    myfillkey <- cut(
-      fml$left,
-      unique(quantile(fml$left, seq(0, 1, 1/ncuts))),
-      ordered_result = TRUE,
-      include.lowest = include_lowest
-    )
-  }
-
-  data = transform (data, fillKey = myfillkey)
-  fillColors = brewer.pal(ncuts, pal)
-  myfills<- as.list(setNames(fillColors, levels(data$fillKey)))
-  
-  if (!is.null(nodata_color)) {
-        # add a fillkey for our nodata value
-	levels(data$fillKey) <- c(levels(data$fillKey), nodata_label) #add it to the factor levels
-	data <- within(data, fillKey[is.na(fillKey)] <- nodata_label) #update the dataframe
- 
-	# add the nodata color to the end of the color pal
- 	fillColors <- c(brewer.pal(ncuts, pal), nodata_color)
-  }
-  
-  # update the fill labels  
-  myfills<- as.list(setNames(fillColors, levels(data$fillKey)))
-  
-  d$set(
-    scope = map, 
-    fills = myfills, #as.list(setNames(fillColors, levels(data$fillKey))), 
-    legend = legend,
-    labels = labels,
-    ...
-  )
-
-  if (!is.null(animate)){
-    range_ = summary(data[[animate]])
-    data = dlply(data, animate, function(x){
-      y = toJSONArray2(x, json = F)
-      names(y) = lapply(y, '[[', fml$right.name)
-      return(y)
-    })
-    d$set(
-      bodyattrs = "ng-app ng-controller='rChartsCtrl'"  
-    )
-    d$addAssets(
-      jshead = "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"
-    )
-    
-    if (play == T){
-      d$setTemplate(chartDiv = sprintf("
-        <div class='container'>
-         <button ng-click='animateMap()'>Play</button>
-         <span ng-bind='year'></span>
-         <div id='{{chartId}}' class='rChart datamaps'></div>
-        </div>
-        <script>
-          function rChartsCtrl($scope, $timeout){
-            $scope.year = %s;
-              $scope.animateMap = function(){
-              if ($scope.year > %s){
-                return;
-              }
-              map{{chartId}}.updateChoropleth(chartParams.newData[$scope.year]);
-              $scope.year += 1
-              $timeout($scope.animateMap, 1000)
-            }
-          }
-       </script>", range_[1], range_[6])
-      )
-      
-    } else {
-
-      d$setTemplate(chartDiv = sprintf("
-        <div class='container'>
-	  <h3>
-          %s <span ng-bind='year'></span>
-          </h3>
-          <p>
-          <button ng-click='previousMap()'> < </button>
-          <input id='slider' style='width:150px;' type='range' min=%s max=%s ng-model='year' width=100>
-           <button ng-click='nextMap()'> > </button>
-	  </p>
-
-          <div id='{{chartId}}' class='rChart datamaps'></div>          
-        </div>
-        <script>
-          function rChartsCtrl($scope){
-            $scope.year = %s;
-            $scope.$watch('year', function(newYear){
-              map{{chartId}}.updateChoropleth(chartParams.newData[newYear]);
-            })
-	    $scope.previousMap = function(){
-                   if ($scope.year != %s) {
-                        $scope.year = parseInt($scope.year) - 1;
-                   }
-            }
-            $scope.nextMap = function(){
-                   if ($scope.year != %s) {
-                        $scope.year = parseInt($scope.year) + 1;
-                   }
-           }
-
-          }
-       </script>", my_title, range_[1], range_[6], range_[1], range_[1], range_[6])
-      )
-
-     
-
-    }
-    d$set(newData = data, data = data[[1]], labels=labels)
-    
-  } else {
-    d$set(data = dlply(data, fml$right.name))
-  }
-  return(d)
-}
+source('R/ichoropleth2.R')
 ```
 
+Options you can set in ichoropleth2 include:
+
+- `map_title`='My map title'  # set the map title
+- `include_lowest`=FALSE # should the lowest data value be included in the first data bin
+- `map_breaks`=c(0,10,30,100) # set manual map breaks
+
+We have also added some forward and back buttons around the year slider so that it is easier to step between years.
+
+<img src='images/ichoropleth2.png' />
+
+
+Let's try it.
+
 ```{r, eval=FALSE}
-map6 <- ic3(vals ~ State, data = indata, animate="year", my_title='doh')
-map6$set(
+map7 <- ichoropleth2(vals ~ State, data = indata, animate="year", map_title='Hello Map, ')
+map7$set(
   geographyConfig = list(
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
       + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
@@ -463,9 +457,86 @@ map6$set(
 )
 
 # display the map
-map6 
+map7 
 
 # save the map
-map6$save('map6.html', cdn=TRUE)
+map7$save('map7.html', cdn=TRUE)
 ```
+
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+###  **CHALLENGE 5**
+
+1. Create an ichoropleth2 map with a title that better describes the data being mapped.
+2. Create an ichoropleth2 map that includes the lowest data value in the first bin.
+3. Create an ichoropleth2 map that uses custom breaks for the data bins.
+<p>&nbsp; &nbsp;</p> <!-- Insert some blank space to improve readability -->
+
+
+### Mapping No Data Values
+
+The ichoropleth function requires very tidy input data. The data we have worked with so far has no NA or no data values. Let's set some values to NA and then map them.
+
+```{r, eval=FALSE}
+
+# Add some no data values
+indata[indata$State=='CA' & indata$year==2002,]$vals <-NA
+indata[indata$State=='CA' & indata$year==2004,]$vals <-NA
+
+# Update the popup text for those data
+indata[indata$State=='CA' & indata$year==2002,]$vals <-NA
+indata[indata$State=='CA' & indata$year==2004,]$vals <-NA
+
+summary(indata$vals)
+
+ichoropleth(vals ~ State, data = indata, animate="year")
+
+map8 <- ichoropleth(vals ~ State, data = na.omit(indata), animate="year")
+ 
+map8$set(
+  geographyConfig = list(
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
+      + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
+    '</div>';  } !#"
+  )
+)
+
+# display the map
+map8 
+
+map8$save('map8.html', cdn=TRUE)
+```
+
+### **CHALLENGE 6**
+
+1. What does the map8.html display for the no data values (California, 2002 & 2004)?
+
+
+Let's try mapping no data values with the `ichoropleth2` function.
+
+```{r, eval=FALSE}
+
+# Create a column in the data frame that will contain the values to display in the popup
+indata$popup_text <- round(indata$vals,2) # set the popup_text equal to the data data values, rounded to two decimal places
+indata[is.na(indata$vals),]$popup_text <- "no data" # update the popup_text to the string "no data" for rows with NA values
+ 
+# create the map - identify the color and legend label for nodata values
+map8b <- ichoropleth2(vals ~ State, data = indata, animate="year", map_title='Top1 Percent Share of Income', include_lowest = TRUE, nodata_color= 'pink', nodata_label = '[no data]')
+
+# add a popup using the popup_text column
+map8b$set(
+  geographyConfig = list(
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
+      + geo.properties.name + ' ' + data.year +  '<br>' +  data.popup_text + '%' +  
+    '</div>';  } !#"
+  )
+)
+
+# display the map
+map8b
+
+# save the map
+map8b$save('map8b.html', cdn=TRUE)
+```
+
 

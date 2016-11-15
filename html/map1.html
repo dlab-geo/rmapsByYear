@@ -1,0 +1,5845 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/topojson.v1.min.js' type='text/javascript'></script>
+    <script src='http://datamaps.github.io/scripts/datamaps.all.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body ng-app ng-controller='rChartsCtrl'>
+    
+    
+            <div class='container'>
+              <input id='slider' type='range' min=2001 max=2013 ng-model='year' width=200>
+              <span ng-bind='year'></span>
+              <div id='chart17f349261a61' class='rChart datamaps'></div>          
+            </div>
+            <script>
+              function rChartsCtrl($scope){
+                $scope.year = 2001;
+                $scope.$watch('year', function(newYear){
+                  mapchart17f349261a61.updateChoropleth(chartParams.newData[newYear]);
+                })
+              }
+           </script>    
+    <script id='popup-template' type='text/x-handlebars-template'>
+    
+</script>
+<script>
+  var chartParams = {
+ "dom": "chart17f349261a61",
+"width":    800,
+"height":    400,
+"scope": "usa",
+"fills": {
+ "(10.2,14.2]": "#EFF3FF",
+"(14.2,15.6]": "#BDD7E7",
+"(15.6,17.2]": "#6BAED6",
+"(17.2,20.4]": "#3182BD",
+"(20.4,36.1]": "#08519C" 
+},
+"legend": true,
+"labels": true,
+"bodyattrs": "ng-app ng-controller='rChartsCtrl'",
+"newData": {
+ "2001": {
+ "AL": {
+ "State": "AL",
+"year": 2001,
+"vals": 14.749,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(14.2,15.6]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2001,
+"vals": 10.307,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2001,
+"vals": 15.836,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2001,
+"vals": 14.886,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(14.2,15.6]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2001,
+"vals": 20.079,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(17.2,20.4]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2001,
+"vals": 16.483,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(15.6,17.2]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2001,
+"vals": 29.658,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2001,
+"vals":  14.86,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(14.2,15.6]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2001,
+"vals": 21.895,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2001,
+"vals": 21.865,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2001,
+"vals": 15.746,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2001,
+"vals": 12.532,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2001,
+"vals": 13.143,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2001,
+"vals": 17.831,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2001,
+"vals": 13.423,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2001,
+"vals": 11.571,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2001,
+"vals": 12.772,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(10.2,14.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2001,
+"vals": 13.964,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(10.2,14.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2001,
+"vals": 15.388,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(14.2,15.6]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2001,
+"vals": 14.056,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2001,
+"vals": 14.744,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2001,
+"vals":  22.14,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2001,
+"vals": 13.812,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(10.2,14.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2001,
+"vals": 15.164,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(14.2,15.6]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2001,
+"vals": 14.557,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(14.2,15.6]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2001,
+"vals": 15.337,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(14.2,15.6]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2001,
+"vals": 14.177,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(14.2,15.6]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2001,
+"vals": 14.272,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(14.2,15.6]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2001,
+"vals":  23.68,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2001,
+"vals": 15.594,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(14.2,15.6]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2001,
+"vals":  20.29,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2001,
+"vals": 17.522,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(17.2,20.4]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2001,
+"vals": 29.402,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2001,
+"vals": 13.749,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(10.2,14.2]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2001,
+"vals": 11.655,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2001,
+"vals": 13.607,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(10.2,14.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2001,
+"vals": 14.434,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(14.2,15.6]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2001,
+"vals": 13.902,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(10.2,14.2]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2001,
+"vals": 15.634,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(14.2,15.6]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2001,
+"vals": 16.584,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(15.6,17.2]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2001,
+"vals": 14.128,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(10.2,14.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2001,
+"vals": 13.521,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(10.2,14.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2001,
+"vals": 15.523,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(14.2,15.6]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2001,
+"vals": 17.193,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(15.6,17.2]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2001,
+"vals": 13.347,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(10.2,14.2]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2001,
+"vals": 13.527,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2001,
+"vals":  13.85,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(10.2,14.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2001,
+"vals": 17.517,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2001,
+"vals": 13.606,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2001,
+"vals": 14.212,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2001,
+"vals": 24.085,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2002": {
+ "AL": {
+ "State": "AL",
+"year": 2002,
+"vals": 14.149,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(10.2,14.2]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2002,
+"vals": 10.225,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": null 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2002,
+"vals": 14.882,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(14.2,15.6]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2002,
+"vals": 14.236,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(14.2,15.6]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2002,
+"vals": 17.688,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(17.2,20.4]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2002,
+"vals": 15.003,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(14.2,15.6]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2002,
+"vals":  23.81,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2002,
+"vals": 14.159,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(10.2,14.2]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2002,
+"vals": 19.344,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(17.2,20.4]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2002,
+"vals": 20.865,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2002,
+"vals": 14.903,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(14.2,15.6]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2002,
+"vals": 11.438,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2002,
+"vals": 12.299,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2002,
+"vals": 17.446,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2002,
+"vals": 13.051,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2002,
+"vals": 11.296,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2002,
+"vals": 13.251,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(10.2,14.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2002,
+"vals": 13.184,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(10.2,14.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2002,
+"vals": 14.148,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(10.2,14.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2002,
+"vals":  13.24,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2002,
+"vals": 13.827,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(10.2,14.2]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2002,
+"vals": 18.369,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(17.2,20.4]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2002,
+"vals": 13.883,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(10.2,14.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2002,
+"vals": 14.749,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(14.2,15.6]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2002,
+"vals": 13.111,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(10.2,14.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2002,
+"vals": 14.334,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(14.2,15.6]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2002,
+"vals":  13.77,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(10.2,14.2]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2002,
+"vals": 13.317,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(10.2,14.2]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2002,
+"vals": 22.747,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2002,
+"vals": 14.103,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(10.2,14.2]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2002,
+"vals": 18.042,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2002,
+"vals": 11.917,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(10.2,14.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2002,
+"vals": 23.983,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2002,
+"vals": 13.791,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(10.2,14.2]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2002,
+"vals": 11.217,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2002,
+"vals": 13.736,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(10.2,14.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2002,
+"vals": 12.938,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(10.2,14.2]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2002,
+"vals": 13.428,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(10.2,14.2]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2002,
+"vals": 14.908,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(14.2,15.6]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2002,
+"vals": 14.614,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(14.2,15.6]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2002,
+"vals": 13.358,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(10.2,14.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2002,
+"vals": 13.462,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(10.2,14.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2002,
+"vals": 14.521,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(14.2,15.6]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2002,
+"vals": 15.724,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(15.6,17.2]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2002,
+"vals": 13.122,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(10.2,14.2]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2002,
+"vals": 13.297,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2002,
+"vals": 13.515,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(10.2,14.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2002,
+"vals": 16.358,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(15.6,17.2]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2002,
+"vals": 11.674,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2002,
+"vals": 14.169,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2002,
+"vals": 22.047,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2003": {
+ "AL": {
+ "State": "AL",
+"year": 2003,
+"vals": 14.651,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(14.2,15.6]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2003,
+"vals": 11.139,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2003,
+"vals": 15.984,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2003,
+"vals": 14.282,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(14.2,15.6]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2003,
+"vals": 19.078,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(17.2,20.4]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2003,
+"vals": 15.477,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(14.2,15.6]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2003,
+"vals": 25.507,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2003,
+"vals": 15.087,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(14.2,15.6]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2003,
+"vals": 21.499,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2003,
+"vals": 20.718,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2003,
+"vals": 15.359,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(14.2,15.6]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2003,
+"vals": 12.662,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2003,
+"vals": 13.105,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2003,
+"vals": 17.973,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2003,
+"vals": 13.472,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2003,
+"vals": 11.603,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2003,
+"vals": 13.721,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(10.2,14.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2003,
+"vals": 13.812,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(10.2,14.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2003,
+"vals": 13.843,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(10.2,14.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2003,
+"vals": 13.147,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2003,
+"vals": 14.543,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2003,
+"vals": 19.749,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(17.2,20.4]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2003,
+"vals": 14.402,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(14.2,15.6]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2003,
+"vals":  15.53,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(14.2,15.6]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2003,
+"vals": 13.524,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(10.2,14.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2003,
+"vals": 14.379,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(14.2,15.6]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2003,
+"vals": 13.886,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(10.2,14.2]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2003,
+"vals": 13.078,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(10.2,14.2]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2003,
+"vals": 23.289,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2003,
+"vals": 14.472,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(14.2,15.6]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2003,
+"vals": 18.481,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2003,
+"vals": 12.232,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(10.2,14.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2003,
+"vals": 25.107,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2003,
+"vals": 14.491,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(14.2,15.6]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2003,
+"vals": 11.176,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2003,
+"vals": 13.626,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(10.2,14.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2003,
+"vals": 14.052,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(10.2,14.2]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2003,
+"vals": 14.165,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(14.2,15.6]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2003,
+"vals":  15.66,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(15.6,17.2]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2003,
+"vals": 15.219,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(14.2,15.6]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2003,
+"vals": 13.922,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(10.2,14.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2003,
+"vals": 12.815,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(10.2,14.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2003,
+"vals": 15.679,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(15.6,17.2]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2003,
+"vals":  16.76,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(15.6,17.2]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2003,
+"vals": 14.227,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(14.2,15.6]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2003,
+"vals": 12.533,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2003,
+"vals": 14.045,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(10.2,14.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2003,
+"vals": 16.704,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(15.6,17.2]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2003,
+"vals": 12.064,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2003,
+"vals": 14.254,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2003,
+"vals": 22.639,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2004": {
+ "AL": {
+ "State": "AL",
+"year": 2004,
+"vals": 16.123,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(15.6,17.2]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2004,
+"vals": 11.819,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2004,
+"vals": 19.415,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(17.2,20.4]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2004,
+"vals": 15.598,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(14.2,15.6]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2004,
+"vals": 21.682,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2004,
+"vals": 18.117,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(17.2,20.4]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2004,
+"vals": 28.559,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2004,
+"vals": 18.377,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(17.2,20.4]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2004,
+"vals": 22.265,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2004,
+"vals": 26.554,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2004,
+"vals": 17.039,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2004,
+"vals": 14.221,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(14.2,15.6]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2004,
+"vals": 15.167,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(14.2,15.6]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2004,
+"vals": 20.089,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2004,
+"vals": 14.316,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(14.2,15.6]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2004,
+"vals": 12.307,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2004,
+"vals": 14.511,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(14.2,15.6]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2004,
+"vals": 14.762,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(14.2,15.6]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2004,
+"vals": 14.095,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(10.2,14.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2004,
+"vals": 14.338,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(14.2,15.6]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2004,
+"vals": 16.303,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(15.6,17.2]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2004,
+"vals": 21.956,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2004,
+"vals": 15.452,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(14.2,15.6]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2004,
+"vals":  16.68,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(15.6,17.2]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2004,
+"vals": 12.995,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(10.2,14.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2004,
+"vals": 15.477,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(14.2,15.6]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2004,
+"vals": 15.017,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(14.2,15.6]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2004,
+"vals": 14.789,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(14.2,15.6]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2004,
+"vals": 30.959,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2004,
+"vals": 16.547,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(15.6,17.2]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2004,
+"vals": 19.685,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2004,
+"vals": 13.725,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(10.2,14.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2004,
+"vals": 28.564,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2004,
+"vals": 15.565,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(14.2,15.6]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2004,
+"vals":   12.9,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2004,
+"vals": 15.295,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(14.2,15.6]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2004,
+"vals": 16.337,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(15.6,17.2]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2004,
+"vals": 15.677,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(15.6,17.2]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2004,
+"vals": 16.586,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(15.6,17.2]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2004,
+"vals": 16.938,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(15.6,17.2]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2004,
+"vals": 15.706,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(15.6,17.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2004,
+"vals": 15.018,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(14.2,15.6]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2004,
+"vals": 17.639,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(17.2,20.4]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2004,
+"vals": 18.682,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(17.2,20.4]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2004,
+"vals": 15.781,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(15.6,17.2]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2004,
+"vals": 14.201,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(14.2,15.6]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2004,
+"vals": 15.652,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(15.6,17.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2004,
+"vals": 17.975,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2004,
+"vals": 12.724,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2004,
+"vals":   15.2,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2004,
+"vals": 24.732,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2005": {
+ "AL": {
+ "State": "AL",
+"year": 2005,
+"vals": 18.477,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(17.2,20.4]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2005,
+"vals": 12.469,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2005,
+"vals": 22.661,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(20.4,36.1]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2005,
+"vals": 16.675,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(15.6,17.2]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2005,
+"vals": 24.202,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2005,
+"vals": 19.561,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(17.2,20.4]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2005,
+"vals": 31.015,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2005,
+"vals": 21.385,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(20.4,36.1]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2005,
+"vals": 23.942,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2005,
+"vals": 31.776,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2005,
+"vals": 19.114,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(17.2,20.4]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2005,
+"vals": 16.469,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(15.6,17.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2005,
+"vals": 18.079,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(17.2,20.4]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2005,
+"vals": 21.673,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(20.4,36.1]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2005,
+"vals": 15.525,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(14.2,15.6]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2005,
+"vals": 12.919,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2005,
+"vals": 16.088,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(15.6,17.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2005,
+"vals": 15.756,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(15.6,17.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2005,
+"vals": 17.651,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(17.2,20.4]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2005,
+"vals": 15.656,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(15.6,17.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2005,
+"vals": 17.341,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(17.2,20.4]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2005,
+"vals": 23.792,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2005,
+"vals": 16.121,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(15.6,17.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2005,
+"vals": 18.237,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(17.2,20.4]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2005,
+"vals":  15.81,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(15.6,17.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2005,
+"vals": 17.107,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(15.6,17.2]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2005,
+"vals": 16.351,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(15.6,17.2]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2005,
+"vals": 15.244,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(14.2,15.6]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2005,
+"vals": 33.295,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2005,
+"vals": 18.005,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(17.2,20.4]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2005,
+"vals": 20.773,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2005,
+"vals": 15.628,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(14.2,15.6]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2005,
+"vals": 30.249,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2005,
+"vals": 17.043,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(15.6,17.2]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2005,
+"vals": 13.231,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2005,
+"vals": 15.858,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(15.6,17.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2005,
+"vals":  17.74,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(17.2,20.4]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2005,
+"vals": 16.908,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(15.6,17.2]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2005,
+"vals": 18.715,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(17.2,20.4]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2005,
+"vals": 17.355,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(17.2,20.4]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2005,
+"vals": 17.741,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(17.2,20.4]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2005,
+"vals": 16.938,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(15.6,17.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2005,
+"vals": 18.761,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(17.2,20.4]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2005,
+"vals": 21.897,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2005,
+"vals": 18.486,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(17.2,20.4]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2005,
+"vals": 16.309,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(15.6,17.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2005,
+"vals": 17.124,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(15.6,17.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2005,
+"vals": 19.685,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2005,
+"vals": 14.973,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2005,
+"vals": 16.479,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(15.6,17.2]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2005,
+"vals": 28.523,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2006": {
+ "AL": {
+ "State": "AL",
+"year": 2006,
+"vals": 20.422,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(20.4,36.1]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2006,
+"vals": 13.396,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2006,
+"vals": 23.075,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(20.4,36.1]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2006,
+"vals":  16.45,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(15.6,17.2]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2006,
+"vals": 24.025,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2006,
+"vals": 21.301,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(20.4,36.1]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2006,
+"vals": 31.746,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2006,
+"vals": 19.136,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(17.2,20.4]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2006,
+"vals": 23.748,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2006,
+"vals": 31.249,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2006,
+"vals": 20.323,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(17.2,20.4]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2006,
+"vals": 15.995,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(15.6,17.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2006,
+"vals": 20.464,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(20.4,36.1]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2006,
+"vals": 22.947,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(20.4,36.1]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2006,
+"vals": 16.321,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(15.6,17.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2006,
+"vals": 14.407,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(14.2,15.6]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2006,
+"vals": 17.444,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(17.2,20.4]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2006,
+"vals": 16.584,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(15.6,17.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2006,
+"vals": 21.994,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(20.4,36.1]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2006,
+"vals": 16.191,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(15.6,17.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2006,
+"vals": 17.697,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(17.2,20.4]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2006,
+"vals": 24.715,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2006,
+"vals": 16.602,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(15.6,17.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2006,
+"vals": 18.508,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(17.2,20.4]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2006,
+"vals": 18.024,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(17.2,20.4]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2006,
+"vals": 17.811,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(17.2,20.4]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2006,
+"vals": 17.839,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(17.2,20.4]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2006,
+"vals": 17.551,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(17.2,20.4]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2006,
+"vals": 32.299,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2006,
+"vals":  19.33,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(17.2,20.4]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2006,
+"vals": 21.224,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2006,
+"vals":  16.86,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(15.6,17.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2006,
+"vals": 32.162,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2006,
+"vals":  18.23,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(17.2,20.4]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2006,
+"vals": 15.721,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(15.6,17.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2006,
+"vals": 16.642,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(15.6,17.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2006,
+"vals": 20.177,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(17.2,20.4]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2006,
+"vals": 18.131,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(17.2,20.4]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2006,
+"vals": 19.437,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(17.2,20.4]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2006,
+"vals":  18.47,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(17.2,20.4]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2006,
+"vals": 18.927,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(17.2,20.4]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2006,
+"vals": 19.403,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(17.2,20.4]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2006,
+"vals": 20.757,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(20.4,36.1]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2006,
+"vals":  23.18,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2006,
+"vals": 19.653,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(17.2,20.4]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2006,
+"vals": 18.297,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(17.2,20.4]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2006,
+"vals": 17.632,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(17.2,20.4]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2006,
+"vals": 20.843,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(20.4,36.1]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2006,
+"vals": 14.297,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2006,
+"vals": 17.686,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(17.2,20.4]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2006,
+"vals": 32.964,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2007": {
+ "AL": {
+ "State": "AL",
+"year": 2007,
+"vals": 19.981,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(17.2,20.4]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2007,
+"vals": 13.901,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2007,
+"vals": 21.635,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(20.4,36.1]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2007,
+"vals":  17.39,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(17.2,20.4]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2007,
+"vals": 24.601,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2007,
+"vals": 21.274,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(20.4,36.1]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2007,
+"vals": 36.069,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2007,
+"vals": 18.708,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(17.2,20.4]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2007,
+"vals": 25.028,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2007,
+"vals": 30.381,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2007,
+"vals": 20.254,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(17.2,20.4]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2007,
+"vals": 15.684,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(15.6,17.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2007,
+"vals": 18.836,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(17.2,20.4]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2007,
+"vals": 24.686,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(20.4,36.1]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2007,
+"vals": 16.568,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(15.6,17.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2007,
+"vals":   14.5,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(14.2,15.6]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2007,
+"vals":  17.98,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(17.2,20.4]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2007,
+"vals": 17.115,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(15.6,17.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2007,
+"vals": 15.808,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(15.6,17.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2007,
+"vals":  15.71,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(15.6,17.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2007,
+"vals":  18.34,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(17.2,20.4]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2007,
+"vals": 26.784,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2007,
+"vals": 17.903,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(17.2,20.4]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2007,
+"vals": 19.203,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(17.2,20.4]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2007,
+"vals": 16.117,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(15.6,17.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2007,
+"vals": 19.009,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(17.2,20.4]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2007,
+"vals": 18.286,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(17.2,20.4]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2007,
+"vals": 17.832,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(17.2,20.4]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2007,
+"vals":  30.27,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2007,
+"vals": 19.522,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(17.2,20.4]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2007,
+"vals": 23.102,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2007,
+"vals": 17.719,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(17.2,20.4]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2007,
+"vals": 35.303,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2007,
+"vals": 18.428,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(17.2,20.4]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2007,
+"vals": 15.601,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(14.2,15.6]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2007,
+"vals": 17.173,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(15.6,17.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2007,
+"vals": 21.288,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(20.4,36.1]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2007,
+"vals": 18.749,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(17.2,20.4]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2007,
+"vals": 20.394,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(20.4,36.1]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2007,
+"vals": 19.567,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(17.2,20.4]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2007,
+"vals": 19.078,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(17.2,20.4]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2007,
+"vals": 18.238,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(17.2,20.4]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2007,
+"vals": 21.335,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(20.4,36.1]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2007,
+"vals":  22.73,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2007,
+"vals": 20.311,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(17.2,20.4]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2007,
+"vals": 18.594,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(17.2,20.4]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2007,
+"vals": 17.183,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(15.6,17.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2007,
+"vals": 22.061,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(20.4,36.1]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2007,
+"vals": 15.426,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2007,
+"vals": 17.574,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(17.2,20.4]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2007,
+"vals": 33.943,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2008": {
+ "AL": {
+ "State": "AL",
+"year": 2008,
+"vals": 17.857,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(17.2,20.4]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2008,
+"vals": 13.883,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2008,
+"vals": 18.004,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(17.2,20.4]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2008,
+"vals": 16.993,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(15.6,17.2]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2008,
+"vals": 20.673,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2008,
+"vals": 18.066,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(17.2,20.4]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2008,
+"vals": 29.429,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2008,
+"vals":  16.33,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(15.6,17.2]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2008,
+"vals": 19.781,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(17.2,20.4]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2008,
+"vals": 25.667,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2008,
+"vals": 17.401,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(17.2,20.4]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2008,
+"vals": 13.431,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2008,
+"vals": 16.417,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(15.6,17.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2008,
+"vals": 22.003,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(20.4,36.1]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2008,
+"vals": 14.458,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(14.2,15.6]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2008,
+"vals": 13.115,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2008,
+"vals": 16.261,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(15.6,17.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2008,
+"vals": 15.677,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(15.6,17.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2008,
+"vals": 23.672,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(20.4,36.1]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2008,
+"vals": 14.072,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2008,
+"vals": 15.034,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2008,
+"vals": 21.825,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2008,
+"vals": 16.458,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(15.6,17.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2008,
+"vals": 17.669,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(17.2,20.4]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2008,
+"vals": 16.324,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(15.6,17.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2008,
+"vals": 18.528,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(17.2,20.4]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2008,
+"vals": 16.416,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(15.6,17.2]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2008,
+"vals": 15.563,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(14.2,15.6]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2008,
+"vals": 23.658,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2008,
+"vals":  16.59,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(15.6,17.2]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2008,
+"vals": 20.881,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2008,
+"vals":   15.8,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(15.6,17.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2008,
+"vals": 30.157,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2008,
+"vals": 16.145,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(15.6,17.2]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2008,
+"vals": 16.522,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(15.6,17.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2008,
+"vals": 15.576,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(14.2,15.6]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2008,
+"vals": 19.343,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(17.2,20.4]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2008,
+"vals": 15.605,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(14.2,15.6]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2008,
+"vals": 18.069,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(17.2,20.4]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2008,
+"vals": 16.487,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(15.6,17.2]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2008,
+"vals": 15.657,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(15.6,17.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2008,
+"vals":  16.86,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(15.6,17.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2008,
+"vals": 17.845,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(17.2,20.4]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2008,
+"vals": 24.103,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2008,
+"vals": 17.065,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(15.6,17.2]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2008,
+"vals": 15.924,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(15.6,17.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2008,
+"vals": 15.524,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(14.2,15.6]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2008,
+"vals": 18.076,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2008,
+"vals": 15.303,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2008,
+"vals": 16.382,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(15.6,17.2]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2008,
+"vals": 28.166,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2009": {
+ "AL": {
+ "State": "AL",
+"year": 2009,
+"vals": 15.337,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(14.2,15.6]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2009,
+"vals": 12.382,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2009,
+"vals": 16.128,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2009,
+"vals":  17.31,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(17.2,20.4]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2009,
+"vals": 18.776,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(17.2,20.4]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2009,
+"vals": 15.405,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(14.2,15.6]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2009,
+"vals": 26.751,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2009,
+"vals": 13.908,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(10.2,14.2]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2009,
+"vals": 20.143,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(17.2,20.4]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2009,
+"vals": 22.745,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2009,
+"vals": 15.901,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2009,
+"vals": 12.908,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2009,
+"vals": 13.655,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2009,
+"vals": 18.406,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2009,
+"vals": 13.661,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2009,
+"vals": 11.669,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2009,
+"vals": 14.652,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(14.2,15.6]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2009,
+"vals": 14.092,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(10.2,14.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2009,
+"vals": 16.143,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(15.6,17.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2009,
+"vals": 12.785,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2009,
+"vals": 13.412,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(10.2,14.2]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2009,
+"vals": 19.102,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(17.2,20.4]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2009,
+"vals": 15.127,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(14.2,15.6]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2009,
+"vals": 15.475,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(14.2,15.6]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2009,
+"vals": 13.943,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(10.2,14.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2009,
+"vals": 14.869,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(14.2,15.6]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2009,
+"vals": 16.908,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(15.6,17.2]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2009,
+"vals": 13.157,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(10.2,14.2]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2009,
+"vals": 21.274,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2009,
+"vals": 15.339,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(14.2,15.6]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2009,
+"vals": 18.101,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2009,
+"vals": 14.432,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(14.2,15.6]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2009,
+"vals":  27.01,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2009,
+"vals": 14.335,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(14.2,15.6]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2009,
+"vals":   13.7,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2009,
+"vals": 13.826,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(10.2,14.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2009,
+"vals": 16.606,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(15.6,17.2]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2009,
+"vals": 14.162,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(14.2,15.6]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2009,
+"vals": 16.073,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(15.6,17.2]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2009,
+"vals": 14.449,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(14.2,15.6]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2009,
+"vals": 14.227,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(14.2,15.6]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2009,
+"vals": 16.029,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(15.6,17.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2009,
+"vals": 15.953,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(15.6,17.2]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2009,
+"vals": 18.358,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(17.2,20.4]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2009,
+"vals": 15.422,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(14.2,15.6]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2009,
+"vals": 13.682,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2009,
+"vals": 13.546,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(10.2,14.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2009,
+"vals": 15.387,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(14.2,15.6]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2009,
+"vals": 15.315,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2009,
+"vals": 15.368,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2009,
+"vals": 20.681,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2010": {
+ "AL": {
+ "State": "AL",
+"year": 2010,
+"vals": 16.747,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(15.6,17.2]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2010,
+"vals": 12.306,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2010,
+"vals": 16.862,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2010,
+"vals": 17.438,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(17.2,20.4]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2010,
+"vals": 22.032,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2010,
+"vals": 17.639,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(17.2,20.4]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2010,
+"vals": 32.705,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2010,
+"vals": 13.338,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(10.2,14.2]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2010,
+"vals": 20.347,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(17.2,20.4]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2010,
+"vals": 23.635,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2010,
+"vals": 16.417,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2010,
+"vals": 11.288,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2010,
+"vals": 13.926,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2010,
+"vals": 20.442,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(20.4,36.1]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2010,
+"vals": 14.103,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2010,
+"vals":   12.1,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2010,
+"vals": 16.402,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(15.6,17.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2010,
+"vals":  15.26,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(14.2,15.6]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2010,
+"vals": 16.271,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(15.6,17.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2010,
+"vals": 13.043,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2010,
+"vals": 14.365,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2010,
+"vals": 24.364,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2010,
+"vals": 16.879,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(15.6,17.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2010,
+"vals": 17.127,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(15.6,17.2]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2010,
+"vals":  17.43,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(17.2,20.4]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2010,
+"vals": 16.491,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(15.6,17.2]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2010,
+"vals": 15.973,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(15.6,17.2]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2010,
+"vals": 15.555,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(14.2,15.6]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2010,
+"vals": 25.161,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2010,
+"vals": 17.604,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(17.2,20.4]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2010,
+"vals":  20.27,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2010,
+"vals": 14.743,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(14.2,15.6]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2010,
+"vals": 30.171,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2010,
+"vals": 14.435,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(14.2,15.6]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2010,
+"vals": 14.949,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(14.2,15.6]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2010,
+"vals": 14.881,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(14.2,15.6]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2010,
+"vals":  16.21,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(15.6,17.2]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2010,
+"vals": 14.738,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(14.2,15.6]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2010,
+"vals": 17.194,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(15.6,17.2]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2010,
+"vals": 15.546,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(14.2,15.6]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2010,
+"vals": 14.969,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(14.2,15.6]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2010,
+"vals": 15.826,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(15.6,17.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2010,
+"vals": 17.174,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(15.6,17.2]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2010,
+"vals": 20.505,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2010,
+"vals": 15.348,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(14.2,15.6]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2010,
+"vals": 13.056,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2010,
+"vals": 15.756,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(15.6,17.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2010,
+"vals": 16.431,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(15.6,17.2]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2010,
+"vals":  14.43,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2010,
+"vals": 15.768,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(15.6,17.2]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2010,
+"vals": 28.471,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2011": {
+ "AL": {
+ "State": "AL",
+"year": 2011,
+"vals": 16.142,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(15.6,17.2]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2011,
+"vals": 11.574,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2011,
+"vals":  16.65,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2011,
+"vals": 17.662,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(17.2,20.4]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2011,
+"vals": 21.504,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2011,
+"vals": 18.786,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(17.2,20.4]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2011,
+"vals":   29.9,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2011,
+"vals": 13.587,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(10.2,14.2]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2011,
+"vals": 19.891,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(17.2,20.4]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2011,
+"vals": 24.643,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2011,
+"vals": 16.188,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2011,
+"vals":  10.62,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2011,
+"vals": 14.093,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2011,
+"vals":  19.82,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2011,
+"vals": 14.165,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(14.2,15.6]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2011,
+"vals": 11.766,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2011,
+"vals": 15.903,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(15.6,17.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2011,
+"vals": 14.177,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(14.2,15.6]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2011,
+"vals": 14.397,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(14.2,15.6]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2011,
+"vals": 12.835,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2011,
+"vals": 14.581,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2011,
+"vals": 24.336,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2011,
+"vals": 16.276,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(15.6,17.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2011,
+"vals":  16.21,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(15.6,17.2]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2011,
+"vals":  13.35,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(10.2,14.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2011,
+"vals": 16.304,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(15.6,17.2]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2011,
+"vals": 15.038,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(14.2,15.6]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2011,
+"vals": 13.313,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(10.2,14.2]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2011,
+"vals": 23.074,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2011,
+"vals":  16.73,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(15.6,17.2]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2011,
+"vals": 20.369,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2011,
+"vals": 13.456,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(10.2,14.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2011,
+"vals": 30.122,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2011,
+"vals": 14.922,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(14.2,15.6]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2011,
+"vals": 16.797,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(15.6,17.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2011,
+"vals": 15.129,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(14.2,15.6]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2011,
+"vals": 17.196,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(17.2,20.4]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2011,
+"vals": 14.699,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(14.2,15.6]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2011,
+"vals": 16.756,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(15.6,17.2]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2011,
+"vals":  16.81,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(15.6,17.2]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2011,
+"vals": 14.411,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(14.2,15.6]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2011,
+"vals": 15.804,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(15.6,17.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2011,
+"vals": 16.413,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(15.6,17.2]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2011,
+"vals": 21.073,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2011,
+"vals": 14.907,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(14.2,15.6]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2011,
+"vals": 14.435,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(14.2,15.6]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2011,
+"vals": 15.151,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(14.2,15.6]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2011,
+"vals": 17.223,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2011,
+"vals":  15.32,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(14.2,15.6]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2011,
+"vals":  15.49,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2011,
+"vals": 22.126,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2012": {
+ "AL": {
+ "State": "AL",
+"year": 2012,
+"vals": 16.653,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(15.6,17.2]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2012,
+"vals": 12.961,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2012,
+"vals": 18.454,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(17.2,20.4]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2012,
+"vals": 21.047,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(20.4,36.1]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2012,
+"vals": 26.381,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2012,
+"vals": 21.247,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(20.4,36.1]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2012,
+"vals": 34.422,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2012,
+"vals": 15.135,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(14.2,15.6]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2012,
+"vals":  25.09,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2012,
+"vals": 30.451,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2012,
+"vals": 18.213,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(17.2,20.4]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2012,
+"vals":  12.46,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2012,
+"vals": 17.235,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(17.2,20.4]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2012,
+"vals": 23.142,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(20.4,36.1]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2012,
+"vals": 15.407,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(14.2,15.6]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2012,
+"vals": 14.555,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(14.2,15.6]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2012,
+"vals": 18.289,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(17.2,20.4]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2012,
+"vals": 15.293,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(14.2,15.6]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2012,
+"vals":  18.96,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(17.2,20.4]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2012,
+"vals": 14.272,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(14.2,15.6]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2012,
+"vals": 15.877,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(15.6,17.2]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2012,
+"vals": 26.494,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2012,
+"vals": 19.882,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(17.2,20.4]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2012,
+"vals": 19.063,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(17.2,20.4]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2012,
+"vals": 15.165,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(14.2,15.6]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2012,
+"vals": 18.756,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(17.2,20.4]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2012,
+"vals": 18.826,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(17.2,20.4]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2012,
+"vals": 17.516,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(17.2,20.4]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2012,
+"vals":  30.83,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2012,
+"vals": 18.142,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(17.2,20.4]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2012,
+"vals": 21.884,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2012,
+"vals": 15.317,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(14.2,15.6]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2012,
+"vals": 33.896,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2012,
+"vals": 16.542,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(15.6,17.2]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2012,
+"vals":  21.55,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(20.4,36.1]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2012,
+"vals": 16.964,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(15.6,17.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2012,
+"vals":   20.7,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(20.4,36.1]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2012,
+"vals": 16.269,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(15.6,17.2]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2012,
+"vals": 19.394,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(17.2,20.4]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2012,
+"vals": 17.523,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(17.2,20.4]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2012,
+"vals":  16.66,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(15.6,17.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2012,
+"vals": 20.054,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(17.2,20.4]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2012,
+"vals": 18.919,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(17.2,20.4]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2012,
+"vals": 24.909,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2012,
+"vals": 19.198,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(17.2,20.4]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2012,
+"vals": 14.927,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(14.2,15.6]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2012,
+"vals": 16.982,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(15.6,17.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2012,
+"vals": 21.116,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(20.4,36.1]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2012,
+"vals": 13.865,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2012,
+"vals": 17.828,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(17.2,20.4]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2012,
+"vals": 27.141,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"2013": {
+ "AL": {
+ "State": "AL",
+"year": 2013,
+"vals": 14.543,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(14.2,15.6]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2013,
+"vals":  11.12,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2013,
+"vals": 16.357,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2013,
+"vals":  17.07,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(15.6,17.2]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2013,
+"vals": 22.715,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(20.4,36.1]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2013,
+"vals": 16.911,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(15.6,17.2]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2013,
+"vals": 30.827,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2013,
+"vals": 13.254,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(10.2,14.2]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2013,
+"vals": 19.642,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(17.2,20.4]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2013,
+"vals":  25.77,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2013,
+"vals": 16.631,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2013,
+"vals":  11.36,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2013,
+"vals": 14.036,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2013,
+"vals": 20.176,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2013,
+"vals": 13.951,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2013,
+"vals": 11.709,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2013,
+"vals": 15.894,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(15.6,17.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2013,
+"vals": 14.037,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(10.2,14.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2013,
+"vals": 16.411,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(15.6,17.2]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2013,
+"vals":  12.72,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2013,
+"vals": 14.265,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2013,
+"vals": 24.381,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2013,
+"vals": 17.398,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(17.2,20.4]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2013,
+"vals": 16.444,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(15.6,17.2]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2013,
+"vals": 13.825,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(10.2,14.2]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2013,
+"vals": 16.153,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(15.6,17.2]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2013,
+"vals": 14.378,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(14.2,15.6]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2013,
+"vals": 13.132,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(10.2,14.2]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2013,
+"vals": 27.775,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2013,
+"vals": 15.011,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(14.2,15.6]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2013,
+"vals": 20.705,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(20.4,36.1]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2013,
+"vals":   13.6,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(10.2,14.2]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2013,
+"vals": 31.815,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2013,
+"vals": 14.635,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(14.2,15.6]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2013,
+"vals":  17.84,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(17.2,20.4]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2013,
+"vals":  14.69,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(14.2,15.6]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2013,
+"vals": 16.708,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(15.6,17.2]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2013,
+"vals": 15.017,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(14.2,15.6]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2013,
+"vals": 16.526,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(15.6,17.2]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2013,
+"vals": 15.641,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(15.6,17.2]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2013,
+"vals": 15.215,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(14.2,15.6]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2013,
+"vals": 16.141,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(15.6,17.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2013,
+"vals": 16.589,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(15.6,17.2]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2013,
+"vals": 21.185,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(20.4,36.1]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2013,
+"vals": 15.597,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(14.2,15.6]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2013,
+"vals": 13.418,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2013,
+"vals": 14.458,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(14.2,15.6]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2013,
+"vals": 17.592,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2013,
+"vals": 12.296,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2013,
+"vals": 15.885,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(15.6,17.2]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2013,
+"vals": 29.583,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+} 
+},
+"data": {
+ "AL": {
+ "State": "AL",
+"year": 2001,
+"vals": 14.749,
+"state_name": "Alabama",
+"code": "AL",
+"fillKey": "(14.2,15.6]" 
+},
+"AK": {
+ "State": "AK",
+"year": 2001,
+"vals": 10.307,
+"state_name": "Alaska",
+"code": "AK",
+"fillKey": "(10.2,14.2]" 
+},
+"AZ": {
+ "State": "AZ",
+"year": 2001,
+"vals": 15.836,
+"state_name": "Arizona",
+"code": "AZ",
+"fillKey": "(15.6,17.2]" 
+},
+"AR": {
+ "State": "AR",
+"year": 2001,
+"vals": 14.886,
+"state_name": "Arkansas",
+"code": "AR",
+"fillKey": "(14.2,15.6]" 
+},
+"CA": {
+ "State": "CA",
+"year": 2001,
+"vals": 20.079,
+"state_name": "California",
+"code": "CA",
+"fillKey": "(17.2,20.4]" 
+},
+"CO": {
+ "State": "CO",
+"year": 2001,
+"vals": 16.483,
+"state_name": "Colorado",
+"code": "CO",
+"fillKey": "(15.6,17.2]" 
+},
+"CT": {
+ "State": "CT",
+"year": 2001,
+"vals": 29.658,
+"state_name": "Connecticut",
+"code": "CT",
+"fillKey": "(20.4,36.1]" 
+},
+"DE": {
+ "State": "DE",
+"year": 2001,
+"vals":  14.86,
+"state_name": "Delaware",
+"code": "DE",
+"fillKey": "(14.2,15.6]" 
+},
+"DC": {
+ "State": "DC",
+"year": 2001,
+"vals": 21.895,
+"state_name": "District of Columbia",
+"code": "DC",
+"fillKey": "(20.4,36.1]" 
+},
+"FL": {
+ "State": "FL",
+"year": 2001,
+"vals": 21.865,
+"state_name": "Florida",
+"code": "FL",
+"fillKey": "(20.4,36.1]" 
+},
+"GA": {
+ "State": "GA",
+"year": 2001,
+"vals": 15.746,
+"state_name": "Georgia",
+"code": "GA",
+"fillKey": "(15.6,17.2]" 
+},
+"HI": {
+ "State": "HI",
+"year": 2001,
+"vals": 12.532,
+"state_name": "Hawaii",
+"code": "HI",
+"fillKey": "(10.2,14.2]" 
+},
+"ID": {
+ "State": "ID",
+"year": 2001,
+"vals": 13.143,
+"state_name": "Idaho",
+"code": "ID",
+"fillKey": "(10.2,14.2]" 
+},
+"IL": {
+ "State": "IL",
+"year": 2001,
+"vals": 17.831,
+"state_name": "Illinois",
+"code": "IL",
+"fillKey": "(17.2,20.4]" 
+},
+"IN": {
+ "State": "IN",
+"year": 2001,
+"vals": 13.423,
+"state_name": "Indiana",
+"code": "IN",
+"fillKey": "(10.2,14.2]" 
+},
+"IA": {
+ "State": "IA",
+"year": 2001,
+"vals": 11.571,
+"state_name": "Iowa",
+"code": "IA",
+"fillKey": "(10.2,14.2]" 
+},
+"KS": {
+ "State": "KS",
+"year": 2001,
+"vals": 12.772,
+"state_name": "Kansas",
+"code": "KS",
+"fillKey": "(10.2,14.2]" 
+},
+"KY": {
+ "State": "KY",
+"year": 2001,
+"vals": 13.964,
+"state_name": "Kentucky",
+"code": "KY",
+"fillKey": "(10.2,14.2]" 
+},
+"LA": {
+ "State": "LA",
+"year": 2001,
+"vals": 15.388,
+"state_name": "Louisiana",
+"code": "LA",
+"fillKey": "(14.2,15.6]" 
+},
+"ME": {
+ "State": "ME",
+"year": 2001,
+"vals": 14.056,
+"state_name": "Maine",
+"code": "ME",
+"fillKey": "(10.2,14.2]" 
+},
+"MD": {
+ "State": "MD",
+"year": 2001,
+"vals": 14.744,
+"state_name": "Maryland",
+"code": "MD",
+"fillKey": "(14.2,15.6]" 
+},
+"MA": {
+ "State": "MA",
+"year": 2001,
+"vals":  22.14,
+"state_name": "Massachusetts",
+"code": "MA",
+"fillKey": "(20.4,36.1]" 
+},
+"MI": {
+ "State": "MI",
+"year": 2001,
+"vals": 13.812,
+"state_name": "Michigan",
+"code": "MI",
+"fillKey": "(10.2,14.2]" 
+},
+"MN": {
+ "State": "MN",
+"year": 2001,
+"vals": 15.164,
+"state_name": "Minnesota",
+"code": "MN",
+"fillKey": "(14.2,15.6]" 
+},
+"MS": {
+ "State": "MS",
+"year": 2001,
+"vals": 14.557,
+"state_name": "Mississippi",
+"code": "MS",
+"fillKey": "(14.2,15.6]" 
+},
+"MO": {
+ "State": "MO",
+"year": 2001,
+"vals": 15.337,
+"state_name": "Missouri",
+"code": "MO",
+"fillKey": "(14.2,15.6]" 
+},
+"MT": {
+ "State": "MT",
+"year": 2001,
+"vals": 14.177,
+"state_name": "Montana",
+"code": "MT",
+"fillKey": "(14.2,15.6]" 
+},
+"NE": {
+ "State": "NE",
+"year": 2001,
+"vals": 14.272,
+"state_name": "Nebraska",
+"code": "NE",
+"fillKey": "(14.2,15.6]" 
+},
+"NV": {
+ "State": "NV",
+"year": 2001,
+"vals":  23.68,
+"state_name": "Nevada",
+"code": "NV",
+"fillKey": "(20.4,36.1]" 
+},
+"NH": {
+ "State": "NH",
+"year": 2001,
+"vals": 15.594,
+"state_name": "New Hampshire",
+"code": "NH",
+"fillKey": "(14.2,15.6]" 
+},
+"NJ": {
+ "State": "NJ",
+"year": 2001,
+"vals":  20.29,
+"state_name": "New Jersey",
+"code": "NJ",
+"fillKey": "(17.2,20.4]" 
+},
+"NM": {
+ "State": "NM",
+"year": 2001,
+"vals": 17.522,
+"state_name": "New Mexico",
+"code": "NM",
+"fillKey": "(17.2,20.4]" 
+},
+"NY": {
+ "State": "NY",
+"year": 2001,
+"vals": 29.402,
+"state_name": "New York",
+"code": "NY",
+"fillKey": "(20.4,36.1]" 
+},
+"NC": {
+ "State": "NC",
+"year": 2001,
+"vals": 13.749,
+"state_name": "North Carolina",
+"code": "NC",
+"fillKey": "(10.2,14.2]" 
+},
+"ND": {
+ "State": "ND",
+"year": 2001,
+"vals": 11.655,
+"state_name": "North Dakota",
+"code": "ND",
+"fillKey": "(10.2,14.2]" 
+},
+"OH": {
+ "State": "OH",
+"year": 2001,
+"vals": 13.607,
+"state_name": "Ohio",
+"code": "OH",
+"fillKey": "(10.2,14.2]" 
+},
+"OK": {
+ "State": "OK",
+"year": 2001,
+"vals": 14.434,
+"state_name": "Oklahoma",
+"code": "OK",
+"fillKey": "(14.2,15.6]" 
+},
+"OR": {
+ "State": "OR",
+"year": 2001,
+"vals": 13.902,
+"state_name": "Oregon",
+"code": "OR",
+"fillKey": "(10.2,14.2]" 
+},
+"PA": {
+ "State": "PA",
+"year": 2001,
+"vals": 15.634,
+"state_name": "Pennsylvania",
+"code": "PA",
+"fillKey": "(14.2,15.6]" 
+},
+"RI": {
+ "State": "RI",
+"year": 2001,
+"vals": 16.584,
+"state_name": "Rhode Island",
+"code": "RI",
+"fillKey": "(15.6,17.2]" 
+},
+"SC": {
+ "State": "SC",
+"year": 2001,
+"vals": 14.128,
+"state_name": "South Carolina",
+"code": "SC",
+"fillKey": "(10.2,14.2]" 
+},
+"SD": {
+ "State": "SD",
+"year": 2001,
+"vals": 13.521,
+"state_name": "South Dakota",
+"code": "SD",
+"fillKey": "(10.2,14.2]" 
+},
+"TN": {
+ "State": "TN",
+"year": 2001,
+"vals": 15.523,
+"state_name": "Tennessee",
+"code": "TN",
+"fillKey": "(14.2,15.6]" 
+},
+"TX": {
+ "State": "TX",
+"year": 2001,
+"vals": 17.193,
+"state_name": "Texas",
+"code": "TX",
+"fillKey": "(15.6,17.2]" 
+},
+"UT": {
+ "State": "UT",
+"year": 2001,
+"vals": 13.347,
+"state_name": "Utah",
+"code": "UT",
+"fillKey": "(10.2,14.2]" 
+},
+"VT": {
+ "State": "VT",
+"year": 2001,
+"vals": 13.527,
+"state_name": "Vermont",
+"code": "VT",
+"fillKey": "(10.2,14.2]" 
+},
+"VA": {
+ "State": "VA",
+"year": 2001,
+"vals":  13.85,
+"state_name": "Virginia",
+"code": "VA",
+"fillKey": "(10.2,14.2]" 
+},
+"WA": {
+ "State": "WA",
+"year": 2001,
+"vals": 17.517,
+"state_name": "Washington",
+"code": "WA",
+"fillKey": "(17.2,20.4]" 
+},
+"WV": {
+ "State": "WV",
+"year": 2001,
+"vals": 13.606,
+"state_name": "West Virginia",
+"code": "WV",
+"fillKey": "(10.2,14.2]" 
+},
+"WI": {
+ "State": "WI",
+"year": 2001,
+"vals": 14.212,
+"state_name": "Wisconsin",
+"code": "WI",
+"fillKey": "(14.2,15.6]" 
+},
+"WY": {
+ "State": "WY",
+"year": 2001,
+"vals": 24.085,
+"state_name": "Wyoming",
+"code": "WY",
+"fillKey": "(20.4,36.1]" 
+} 
+},
+"id": "chart17f349261a61" 
+}
+  chartParams.element = document.getElementById('chart17f349261a61')
+  
+  
+  var mapchart17f349261a61 = new Datamap(chartParams);
+  
+  
+    
+  // draw a bubble map if specified
+  if (chartParams.bubbles) {
+    var bubbles = chartParams.bubbles
+    mapchart17f349261a61.bubbles(bubbles)
+  }
+  
+  if (chartParams.labels){
+    mapchart17f349261a61.labels()
+  }
+  
+  if (chartParams.legend){
+    mapchart17f349261a61.legend()
+  }
+  
+  setProjection = function( element, options ) {
+    var projection, path;
+ 
+      projection = d3.geo.albersUsa()
+        .scale(element.offsetWidth)
+        .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+ 
+    path = d3.geo.path()
+      .projection( projection );
+ 
+    return {path: path, projection: projection};
+  }
+</script>
+
+<style>
+.datamaps {
+  position: relative;
+}
+</style>
+    
+    <script></script>    
+  </body>
+</html>
