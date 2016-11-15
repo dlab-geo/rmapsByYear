@@ -1,5 +1,5 @@
 ---
-title: "Mapping State-Level Data by Year"
+title: "Mapping State-Level Data by Year, a Tutorial"
 author: "Patty Frontiera"
 date: "November 12, 2016"
 output: 
@@ -23,8 +23,8 @@ For details on how to install rMaps and create choropleth maps see the [rMaps gi
 
 This tutorial provides additional rMaps examples and tips as well as custom code for extending the functionality of rMaps.
 
-## ggplot
-The `ggplot2` package is a widely used and extremely powerful R library for creating and customizing many different types of data plots including scatterplots, bar plots, and histograms, etc., as well as maps. We will use this library to create micromaps - a series of small maps for the same region, in this case US states, where the data vary along one facet, here time. We include this section in the tutorial to provide an alternate   method for geographically visualizing many years of data. An example is shown below.
+## ggplot2
+The `ggplot2` package is a widely used and extremely powerful R library for creating and customizing many different types of data plots including scatterplots, bar plots, and histograms, etc., as well as maps. We will use this library to create micromaps - a series of small maps for the same region, in this case US states, where the data vary along one facet, here time. We include code for this at the end of the tutorial to provide an alternate method for geographically visualizing many years of data. An example is shown below.
 
 <img src="images/top1.png" width="600px" />
 
@@ -551,17 +551,158 @@ This section provides some extra information for pre-processing the data.
 The data we have worked with so far has been tidy. We have a row for each state for each year, which makes the data in `long` format. 
 If we have a column for each year of data for each state that would be considered `wide` data.
 
-```{r, eval=FALSE}
+```{r}
 # Identify the data to be mapped
 in_data_file_wide <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_wide.csv"
 
 # Read in the data
 indata_wide <- read.csv(in_data_file_wide, stringsAsFactors = FALSE)
   
+# take a look
 dim(indata_wide)
-head(indata_wide)
+head(indata_wide[,c(1:10)])
   
 ```  
 
-As you can see, that's some pretty wide data with one column for 87 years of data (1917 - 2013). Moreover, because the column names are numbers the are read in with an "X" prepended.
+As you can see, that's some pretty wide data with one column for 87 years of data (1917 - 2013). Moreover, because the column names are numbers the are read in with an "X" prepended. Let's clean that up
 
+```{r}
+# longify the data
+indata_long <- gather(indata_wide,year,vals,2:length(indata_wide))  # IMPORTANT - THESE YEARS ARE HARDCODED!!!!
+
+# Remove the prepended 'X' from the years and convert to integers
+indata_long$year <- as.integer(gsub('X','',indata_long$year))
+
+# Make sure the data values area numeric - also remove any commas
+indata_long$vals <- as.numeric(gsub(',','',indata_long$vals))
+
+head(indata_long)
+```
+
+That looks a lot better but the data do not contain abbreviations for the states. That means we can map with `rMaps`.
+
+## Adding State Abbreviations
+
+We can add the state abbreviations by joining our state data to a lookup file that contains state names and abbreviations. This is shown below.
+
+```{r}
+
+# standardize state name format to init caps
+indata_long$State <- gsub("(^|[[:space:]])([[:alpha:]])", "\\1\\U\\2", indata_long$State, perl=TRUE) 
+
+# Read in a lookup table that maps state abbreviations to state names
+state_abbrev_lu <- read.csv("https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/state_abbrev.csv", stringsAsFactors = FALSE)
+
+# merge the state abbreviations into our long data frame
+indata_long <- merge(x = indata_long, y = state_abbrev_lu[ , c("name", "code")], by.x="State", by.y = "name", all.x=TRUE, incomparables=NA)
+
+# Relable the columns to be clearer
+names(indata_long)<- c("state_name", "year", 'vals', 'State')
+
+# Remove any rows that do not contain state abbreviation
+indata_long <- indata[!is.na(indata_long$State),]
+ 
+# review output
+head(indata_long)
+
+```
+
+
+## Map the Wide Data
+
+Now that we have converted our wide data to long format and added state abbreviations, let's map the data for 2001-2013 to see if it is consistent with the long data that we started with.
+
+```{r, eval=FALSE}
+ichoropleth2(vals ~ State, data = subset(indata_long, year > 2000),  animate = 'year')
+```
+
+
+### **CHALLENGE 7**
+
+1. Map all 87 years of data, saving it to an HTML file.
+2. Map a different variable in the original data file, [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls). You can download the excel file and save one of the worksheets to CSV file. Or you can load the worksheet into R directly using readxl package. The code for this is shown below.
+
+```
+download("http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls", "Frank_WTID_2013.xls")
+indata_xls <- read_excel('Frank_WTID_2013.xls', 3)
+head(indata_xls)
+```
+
+# EXTRA: Micromaps with ggplot2
+
+The code below shows another approach to creating maps for multi-year series of state-level data.
+
+```{r}
+
+library(rgeos)
+library(rgdal) # needs gdal > 1.11.0
+library(ggplot2)
+library(grid)
+
+# ggplot map theme
+# After devtools::source_gist("https://gist.github.com/hrbrmstr/33baa3a79c5cfef0f6df")
+theme_map <- function(base_size=9, base_family="") {
+  require(grid)
+  theme_bw(base_size=base_size, base_family=base_family) %+replace%
+    theme(axis.line=element_blank(),
+          axis.text=element_blank(),
+          axis.ticks=element_blank(),
+          axis.title=element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_blank(),
+          panel.grid=element_blank(),
+          panel.margin=unit(0, "lines"),
+          strip.background = element_blank(),
+          plot.background=element_blank(),
+          legend.justification = c(1,0), 
+          legend.position = c(1,0)
+    )
+}
+
+ 
+map = readOGR(dsn="data/state_squares.json",layer="usa") # using local squares map
+map_names <- data.frame(id=0:(length(map@data$id)-1), State=map$id )
+
+
+map_df <- fortify(map)
+map_df <- merge(map_df, map_names, by="id")
+map_df2 <- merge(map_df, indata, by="State")
+
+# Map 1: simple map with labels
+# find state centers for label points
+centers <- data.frame(gCentroid(map, byid=TRUE))
+centers$State <- map_names$State
+
+gg <- ggplot()
+gg <- gg + geom_map(data=map_df2, map=map_df2,
+                    aes(map_id=id, x=long, y=lat, group=group),
+                    color="#ffffff", fill="#bbbbbb", size=0.25)
+gg <- gg + geom_text(data=centers, aes(label=State, x=x, y=y), size=3)
+gg <- gg + coord_map()
+gg <- gg + labs(x="", y="", title="State Squares")
+gg <- gg + theme_map()
+gg
+
+# Map 2: choropleth micromap 
+
+
+map_df2$colcuts <- cut(map_df2$vals, breaks = c(min(map_df2$vals), 10, 15, 20, 25, 30,max(map_df2$vals)),right = FALSE)
+
+gg <- ggplot()
+gg <- gg + geom_map(data=map_df2[map_df2$year>2006,], map=map_df2[map_df2$year>2006,],
+                    aes(map_id=id, x=long, y=lat, group=group, fill=colcuts), color="white", size=0.05)
+ 
+gg <- gg + scale_fill_brewer(palette="YlOrRd", name="Percent")
+gg <- gg +facet_wrap( ~ year, ncol=4) 
+gg <- gg + labs(x="", y="", title="Top 1 Percent Income Shares")
+gg <- gg + theme_map() 
+
+# view the micromap
+gg
+
+# save it to an image file
+ggsave(gg,file='top1_micro.png', width=8, height=4)
+
+ 
+
+```
