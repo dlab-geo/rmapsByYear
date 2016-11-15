@@ -6,9 +6,6 @@ output:
   html_document:
     toc: yes
     toc_float: yes
-  pdf_document:
-    toc: yes
-  word_document: default
 ---
 
 # About
@@ -40,6 +37,17 @@ Another benefit of using R was that we wanted a workflow that could be done loca
 # Data
 
 To follow along with this tutorial we use the *U.S. State-Level Income Inequality Data* provided by Mark W. Frank on the website: http://www.shsu.edu/eco_mwf/inequality.html.The specific data file that we downloaded and preprocessed to create some sample data sets is: [http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls](http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls). We have copied and created subsets of these data to facilitate this tutorial.
+
+
+## Tutorial Data
+
+You can get all the files for this tutorial if you do the following.
+
+1. Go to (https://github.com/dlab-geo/rmapsByYear), click on the Clone or Download button and then select Download Zip.  
+2. Unzip the files
+3. Make a note of the folder in which the files reside in your computer so that you can open them.
+4. Open the `rmapsByYear.Rmd` RMarkdown file in RStudio. We will walk through & execute the code in this file in RStudio.
+4. Open the `rmapsByYear.HTML` file in your web browser to follow along with the presentation and as a reference to move ahead or catch up.
 
  
 # Creating RMaps
@@ -99,7 +107,7 @@ You must set the working directory to a location on your computer in which you d
 getwd()
 
 # set working directory
-my_rmaps_directory <- "~/Documents/Dlab/dlab_workshops/rmapsByYear"
+my_rmaps_directory <- "/Users/patty/Documents/Dlab/dlab_workshops/rmapsByYear"
 setwd(my_rmaps_directory)
 
 # Identify the data to be mapped
@@ -400,7 +408,7 @@ map5$set(
 map5
 
 # save the map
-map$save('map5.html', cdn=TRUE)
+map5$save('map5.html', cdn=TRUE)
 ```
 
 
@@ -434,10 +442,13 @@ map6$save('map6.html', cdn=TRUE)
 
 The ichropleth function is a great convenience wrapper around Datamaps. It doesn't try to do too much. It does one thing very well - creating an annual map series for state-level data. To do more, you can write code to create maps directly with the `rCharts` and `Datamaps` packages. Code examples for getting started with this are shown in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/).
 
-Another option is to extend the code for ichoropleth to make it a bit more customizable. We did this by creating the function `ichoropleth2` which is in the R script file `ichoropleth2.R`. To access this function source the R script.
+Another option is to extend the code for ichoropleth to make it a bit more customizable. We did this by creating the function `ichoropleth2` which is in the R script file `ichoropleth2.R`. 
 
-```{r, eval=FALSE}
+### To access the ichoropleth2 function first `source` the ichoropleth2.R script.
+```{r}
+
 source('R/ichoropleth2.R')
+
 ```
 
 Options you can set in ichoropleth2 include:
@@ -482,7 +493,7 @@ map7$save('map7.html', cdn=TRUE)
 
 ### Mapping No Data Values
 
-The ichoropleth function requires very tidy input data. The data we have worked with so far has no NA or no data values. Let's set some values to NA and then map them.
+The `ichoropleth` function requires very tidy input data. The data we have worked with so far has no NA or no data values. Let's set some values to NA and then map them.
 
 ```{r, eval=FALSE}
 
@@ -496,10 +507,14 @@ indata[indata$State=='CA' & indata$year==2004,]$vals <-NA
 
 summary(indata$vals)
 
+# Mapping data with no data values won't work with the ichoropleth function
 ichoropleth(vals ~ State, data = indata, animate="year")
 
+#... unless you omit those rows of data
 map8 <- ichoropleth(vals ~ State, data = na.omit(indata), animate="year")
- 
+map8
+
+# We will add the popup so we can see the data values for each state-year combo
 map8$set(
   geographyConfig = list(
     popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
@@ -511,6 +526,7 @@ map8$set(
 # display the map
 map8 
 
+# save to HTML - need to look at the HTML file to explore how ichoropleth handles missing years of data
 map8$save('map8.html', cdn=TRUE)
 ```
 
@@ -519,7 +535,7 @@ map8$save('map8.html', cdn=TRUE)
 1. What does the map8.html display for the no data values (California, 2002 & 2004)?
 
 
-Let's try mapping no data values with the `ichoropleth2` function.
+Let's try mapping no data values with the `ichoropleth2` function. Here we set the color of states for which we have no data to `pink` and add a label for those values to the legend.
 
 ```{r, eval=FALSE}
 
@@ -545,6 +561,9 @@ map8b
 # save the map
 map8b$save('map8b.html', cdn=TRUE)
 ```
+
+
+Take a look at the output HTML file `map8b.html` and see how the map displays the data for CA in 2002 & 2004. What is in the popup?
 
 
 # Data Wrangling

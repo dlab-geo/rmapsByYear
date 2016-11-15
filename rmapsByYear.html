@@ -248,6 +248,17 @@ div.tocify {
 <div id="data" class="section level1">
 <h1>Data</h1>
 <p>To follow along with this tutorial we use the <em>U.S. State-Level Income Inequality Data</em> provided by Mark W. Frank on the website: <a href="http://www.shsu.edu/eco_mwf/inequality.html.The" class="uri">http://www.shsu.edu/eco_mwf/inequality.html.The</a> specific data file that we downloaded and preprocessed to create some sample data sets is: <a href="http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls"><a href="http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls" class="uri">http://www.shsu.edu/eco_mwf/Frank_WTID_2013.xls</a></a>. We have copied and created subsets of these data to facilitate this tutorial.</p>
+<div id="tutorial-data" class="section level2">
+<h2>Tutorial Data</h2>
+<p>You can get all the files for this tutorial if you do the following.</p>
+<ol style="list-style-type: decimal">
+<li>Go to (<a href="https://github.com/dlab-geo/rmapsByYear" class="uri">https://github.com/dlab-geo/rmapsByYear</a>), click on the Clone or Download button and then select Download Zip.<br /></li>
+<li>Unzip the files</li>
+<li>Make a note of the folder in which the files reside in your computer so that you can open them.</li>
+<li>Open the <code>rmapsByYear.Rmd</code> RMarkdown file in RStudio. We will walk through &amp; execute the code in this file in RStudio.</li>
+<li>Open the <code>rmapsByYear.HTML</code> file in your web browser to follow along with the presentation and as a reference to move ahead or catch up.</li>
+</ol>
+</div>
 </div>
 <div id="creating-rmaps" class="section level1">
 <h1>Creating RMaps</h1>
@@ -301,7 +312,7 @@ library(rMaps)</code></pre>
 getwd()</code></pre>
 <pre><code>## [1] &quot;/Users/patty/Documents/Dlab/dlab_workshops/rmapsByYear&quot;</code></pre>
 <pre class="r"><code># set working directory
-my_rmaps_directory &lt;- &quot;~/Documents/Dlab/dlab_workshops/rmapsByYear&quot;
+my_rmaps_directory &lt;- &quot;/Users/patty/Documents/Dlab/dlab_workshops/rmapsByYear&quot;
 setwd(my_rmaps_directory)
 
 # Identify the data to be mapped
@@ -569,7 +580,7 @@ map5$set(
 map5
 
 # save the map
-map$save('map5.html', cdn=TRUE)</code></pre>
+map5$save('map5.html', cdn=TRUE)</code></pre>
 <p>That works pretty well, but the equirectangular map projection stretches the country too much in an east-west direction. Let’s try the <code>mercator</code> projection which will give a North-South stretch to the mapped squares. Consquently, the default height of the map, which is 500 pixels, cuts off some of the data. We can address that by setting the map hieght to <code>600</code> pixels. Feel free to experiment with different height values.</p>
 <pre class="r"><code>map6 &lt;- ichoropleth(vals ~ State, data = indata, animate=&quot;year&quot;)
 map6$set(
@@ -597,7 +608,9 @@ map6$save('map6.html', cdn=TRUE)</code></pre>
 <div id="extending-rmaps" class="section level1">
 <h1>Extending rMaps</h1>
 <p>The ichropleth function is a great convenience wrapper around Datamaps. It doesn’t try to do too much. It does one thing very well - creating an annual map series for state-level data. To do more, you can write code to create maps directly with the <code>rCharts</code> and <code>Datamaps</code> packages. Code examples for getting started with this are shown in <a href="http://rmaps.github.io/blog/posts/animated-choropleths/">this blog post</a>.</p>
-<p>Another option is to extend the code for ichoropleth to make it a bit more customizable. We did this by creating the function <code>ichoropleth2</code> which is in the R script file <code>ichoropleth2.R</code>. To access this function source the R script.</p>
+<p>Another option is to extend the code for ichoropleth to make it a bit more customizable. We did this by creating the function <code>ichoropleth2</code> which is in the R script file <code>ichoropleth2.R</code>.</p>
+<div id="to-access-the-ichoropleth2-function-first-source-the-ichoropleth2.r-script." class="section level3">
+<h3>To access the ichoropleth2 function first <code>source</code> the ichoropleth2.R script.</h3>
 <pre class="r"><code>source('R/ichoropleth2.R')</code></pre>
 <p>Options you can set in ichoropleth2 include:</p>
 <ul>
@@ -626,6 +639,7 @@ map7$save('map7.html', cdn=TRUE)</code></pre>
    
 </p>
 <p><!-- Insert some blank space to improve readability --></p>
+</div>
 <div id="challenge-5" class="section level3">
 <h3><strong>CHALLENGE 5</strong></h3>
 <ol style="list-style-type: decimal">
@@ -640,7 +654,7 @@ map7$save('map7.html', cdn=TRUE)</code></pre>
 </div>
 <div id="mapping-no-data-values" class="section level3">
 <h3>Mapping No Data Values</h3>
-<p>The ichoropleth function requires very tidy input data. The data we have worked with so far has no NA or no data values. Let’s set some values to NA and then map them.</p>
+<p>The <code>ichoropleth</code> function requires very tidy input data. The data we have worked with so far has no NA or no data values. Let’s set some values to NA and then map them.</p>
 <pre class="r"><code># Add some no data values
 indata[indata$State=='CA' &amp; indata$year==2002,]$vals &lt;-NA
 indata[indata$State=='CA' &amp; indata$year==2004,]$vals &lt;-NA
@@ -651,10 +665,14 @@ indata[indata$State=='CA' &amp; indata$year==2004,]$vals &lt;-NA
 
 summary(indata$vals)
 
+# Mapping data with no data values won't work with the ichoropleth function
 ichoropleth(vals ~ State, data = indata, animate=&quot;year&quot;)
 
+#... unless you omit those rows of data
 map8 &lt;- ichoropleth(vals ~ State, data = na.omit(indata), animate=&quot;year&quot;)
- 
+map8
+
+# We will add the popup so we can see the data values for each state-year combo
 map8$set(
   geographyConfig = list(
     popupTemplate = &quot;#! function(geo, data){ return '&lt;div class=\&quot;hoverinfo\&quot;&gt;' 
@@ -666,6 +684,7 @@ map8$set(
 # display the map
 map8 
 
+# save to HTML - need to look at the HTML file to explore how ichoropleth handles missing years of data
 map8$save('map8.html', cdn=TRUE)</code></pre>
 </div>
 <div id="challenge-6" class="section level3">
@@ -673,7 +692,7 @@ map8$save('map8.html', cdn=TRUE)</code></pre>
 <ol style="list-style-type: decimal">
 <li>What does the map8.html display for the no data values (California, 2002 &amp; 2004)?</li>
 </ol>
-<p>Let’s try mapping no data values with the <code>ichoropleth2</code> function.</p>
+<p>Let’s try mapping no data values with the <code>ichoropleth2</code> function. Here we set the color of states for which we have no data to <code>pink</code> and add a label for those values to the legend.</p>
 <pre class="r"><code># Create a column in the data frame that will contain the values to display in the popup
 indata$popup_text &lt;- round(indata$vals,2) # set the popup_text equal to the data data values, rounded to two decimal places
 indata[is.na(indata$vals),]$popup_text &lt;- &quot;no data&quot; # update the popup_text to the string &quot;no data&quot; for rows with NA values
@@ -695,6 +714,7 @@ map8b
 
 # save the map
 map8b$save('map8b.html', cdn=TRUE)</code></pre>
+<p>Take a look at the output HTML file <code>map8b.html</code> and see how the map displays the data for CA in 2002 &amp; 2004. What is in the popup?</p>
 </div>
 </div>
 <div id="data-wrangling" class="section level1">
