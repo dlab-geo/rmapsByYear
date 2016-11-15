@@ -2,11 +2,13 @@
 title: "Mapping State-Level Data by Year, a Tutorial"
 author: "Patty Frontiera"
 date: "November 12, 2016"
-output: 
-  html_document: 
+output:
+  html_document:
     toc: yes
     toc_float: yes
-    
+  pdf_document:
+    toc: yes
+  word_document: default
 ---
 
 # About
@@ -50,7 +52,7 @@ To follow along with this tutorial we use the *U.S. State-Level Income Inequalit
 # Install helper packages
 #
 # first identify the required packages
-required.pkg <- c('tidyr','plyr','dplyr','RColorBrewer','readxl','devtools','downloader')
+required.pkg <- c('tidyr','plyr','dplyr','RColorBrewer','readxl','devtools','downloader','rmarkdown','knitr')
 
 #check to see which ones are not installed
 pkgs.not.installed <- required.pkg[!sapply(required.pkg, function(p) require(p, character.only=T))]
@@ -90,7 +92,12 @@ library(rMaps)
 
 
 ### Explore the Data
+
+You must set the working directory to a location on your computer in which you downloaded the tutorial files.
 ```{r, echo=TRUE}
+# Where am I?
+getwd()
+
 # set working directory
 my_rmaps_directory <- "~/Documents/Dlab/dlab_workshops/rmapsByYear"
 setwd(my_rmaps_directory)
@@ -98,7 +105,7 @@ setwd(my_rmaps_directory)
 # Identify the data to be mapped
 in_data_file <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_long_2000to2013.csv"
 
-# Read in the data
+# Read in the data as is - not guessing about data types like factors
 indata <- read.csv(in_data_file, stringsAsFactors = FALSE)
 
 # Take a look at the data
@@ -512,8 +519,6 @@ map8$save('map8.html', cdn=TRUE)
 1. What does the map8.html display for the no data values (California, 2002 & 2004)?
 
 
-
-
 Let's try mapping no data values with the `ichoropleth2` function.
 
 ```{r, eval=FALSE}
@@ -628,7 +633,9 @@ indata_xls <- read_excel('Frank_WTID_2013.xls', 3)
 head(indata_xls)
 ```
 
-# EXTRA: Micromaps with ggplot2
+# EXTRAS
+
+## Micromaps with ggplot2
 
 The code below shows another approach to creating maps for multi-year series of state-level data.
 
@@ -705,4 +712,26 @@ ggsave(gg,file='top1_micro.png', width=8, height=4)
 
  
 
+```
+
+## Session Info
+
+The following shows the state my R installation. If yours is different when you run this command you may have problems running the code above.
+```{r, eval=FALSE}
+sessionInfo()
+```
+
+```
+R version 3.2.2 (2015-08-14)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.11.5 (El Capitan)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] magrittr_1.5    assertthat_0.1  rsconnect_0.5   htmltools_0.2.6 tools_3.2.2     tibble_1.2      yaml_2.1.13    
 ```
