@@ -2,7 +2,11 @@
 title: "Mapping State-Level Data by Year"
 author: "Patty Frontiera"
 date: "November 12, 2016"
-output: html_document
+output: 
+  html_document: 
+    toc: yes
+    toc_float: yes
+    
 ---
 
 # About
@@ -40,18 +44,26 @@ To follow along with this tutorial we use the *U.S. State-Level Income Inequalit
 
 ### Step 1. Install required R libraries
 ```{r results='hide', message=FALSE, warning=FALSE}
+#
 # Install helper packages
+#
+# first identify the required packages
 required.pkg <- c('tidyr','plyr','dplyr','RColorBrewer','readxl','devtools','downloader')
+
+#check to see which ones are not installed
 pkgs.not.installed <- required.pkg[!sapply(required.pkg, function(p) require(p, character.only=T))]
+
+#install the ones not installed
 if (length(pkgs.not.installed > 0)) {
   install.packages(pkgs.not.installed, dependencies=TRUE)
 } else {
   print("Helper packages installed.")
 }
 
-# Install rMaps and rCharts packages for creating the map
+# Install rMaps and rCharts packages for creating the rMaps
 if ("rMaps" %in% rownames(installed.packages()) == FALSE ) {
   require(devtools)
+  require(downloader)
   install_github('ramnathv/rCharts@dev')
   install_github('ramnathv/rMaps')
 } else {
@@ -65,8 +77,6 @@ if ("rMaps" %in% rownames(installed.packages()) == FALSE ) {
 #--------------------
 # Load Libraries
 #--------------------
-#library(reshape2)
-#library(plyr)
 library(tidyr)
 library(plyr)
 library(dplyr)
@@ -80,7 +90,7 @@ library(rMaps)
 ### Step 3. Read in data in the format required by *rMaps*
 ```{r, echo=TRUE}
 # set working directory
-my_rmaps_directory <- "~/Documents/Dlab/consults/robin_e/rmapsByYear"
+my_rmaps_directory <- "~/Documents/Dlab/dlab_workshops/rmapsByYear"
 setwd(my_rmaps_directory)
 
 # Identify the data to be mapped
@@ -90,6 +100,7 @@ in_data_file <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/d
 indata <- read.csv(in_data_file, stringsAsFactors = FALSE)
 
 # Take a look at the data
+dim(indata)
 head(indata)
 
 # Subset the data to make it more manageable for this tutorial
@@ -200,7 +211,11 @@ map2$set(
     '</div>';  } !#"
   )
 )
-map2
+
+# display the map
+map2 
+
+# save the map
 map2$save('map2.html', cdn=TRUE)
 ```
 
@@ -275,7 +290,7 @@ map4$save('map4.html', cdn=TRUE)
 ```
 
 
-That works pretty well, but the squares spread out the country in too elongated a fashion. Let's try the `mercator` projection which will give a North-South stretch to the map data. Consquently we set the map hieght to `600` pixels. The default height is 500 which cuts off some of the data. Try changing it.
+That works pretty well, but the resultant map stretches the country too much in an east-west direction. Let's try the `mercator` projection which will give a North-South stretch to the mapped squares. Consquently, the default height of the map, which is 500 pixels, cuts off some of the data. We can address that by setting the map hieght to `600` pixels. Feel free to experiment with different height values.
 
 ```{r, eval=FALSE}
 map5 <- ichoropleth(vals ~ State, data = indata, animate="year")
@@ -300,4 +315,157 @@ map5
 mapt$save('map5.html', cdn=TRUE)
 
 
+
+## Sharing your rMap
+http://rpubs.com/pfrontiera/226917
+```
+
+
+## More customizations
+
+The ichropleth function is a great convenience wrapper around Datamaps. It doesn't try to do too much. It does one thing very well - creating an annual map series for state-level data. To do more, you can write create maps directly with Datamaps. Code examples for this are shown in [this blog post](http://rmaps.github.io/blog/posts/animated-choropleths/).
+
+
+```{r, eval=FALSE}
+ic3 <- function(x, data, pal = "Blues", nodata_color="white", nodata_label="NA", ncuts = 5, animate = NULL, play = F, map = 'usa', legend = TRUE, labels = TRUE, include_lowest=FALSE, my_breaks = NULL, my_title='', ...){
+
+  d <- Datamaps$new()
+  fml = lattice::latticeParseFormula(x, data = data)
+
+  
+  if (!is.null(my_breaks)) {
+      myfillkey <- cut(fml$left, breaks = my_breaks, ordered_result=TRUE, include.lowest=include_lowest)
+  } else {
+    myfillkey <- cut(
+      fml$left,
+      unique(quantile(fml$left, seq(0, 1, 1/ncuts))),
+      ordered_result = TRUE,
+      include.lowest = include_lowest
+    )
+  }
+
+  data = transform (data, fillKey = myfillkey)
+  fillColors = brewer.pal(ncuts, pal)
+  myfills<- as.list(setNames(fillColors, levels(data$fillKey)))
+  
+  if (!is.null(nodata_color)) {
+        # add a fillkey for our nodata value
+	levels(data$fillKey) <- c(levels(data$fillKey), nodata_label) #add it to the factor levels
+	data <- within(data, fillKey[is.na(fillKey)] <- nodata_label) #update the dataframe
+ 
+	# add the nodata color to the end of the color pal
+ 	fillColors <- c(brewer.pal(ncuts, pal), nodata_color)
+  }
+  
+  # update the fill labels  
+  myfills<- as.list(setNames(fillColors, levels(data$fillKey)))
+  
+  d$set(
+    scope = map, 
+    fills = myfills, #as.list(setNames(fillColors, levels(data$fillKey))), 
+    legend = legend,
+    labels = labels,
+    ...
+  )
+
+  if (!is.null(animate)){
+    range_ = summary(data[[animate]])
+    data = dlply(data, animate, function(x){
+      y = toJSONArray2(x, json = F)
+      names(y) = lapply(y, '[[', fml$right.name)
+      return(y)
+    })
+    d$set(
+      bodyattrs = "ng-app ng-controller='rChartsCtrl'"  
+    )
+    d$addAssets(
+      jshead = "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"
+    )
+    
+    if (play == T){
+      d$setTemplate(chartDiv = sprintf("
+        <div class='container'>
+         <button ng-click='animateMap()'>Play</button>
+         <span ng-bind='year'></span>
+         <div id='{{chartId}}' class='rChart datamaps'></div>
+        </div>
+        <script>
+          function rChartsCtrl($scope, $timeout){
+            $scope.year = %s;
+              $scope.animateMap = function(){
+              if ($scope.year > %s){
+                return;
+              }
+              map{{chartId}}.updateChoropleth(chartParams.newData[$scope.year]);
+              $scope.year += 1
+              $timeout($scope.animateMap, 1000)
+            }
+          }
+       </script>", range_[1], range_[6])
+      )
+      
+    } else {
+
+      d$setTemplate(chartDiv = sprintf("
+        <div class='container'>
+	  <h3>
+          %s <span ng-bind='year'></span>
+          </h3>
+          <p>
+          <button ng-click='previousMap()'> < </button>
+          <input id='slider' style='width:150px;' type='range' min=%s max=%s ng-model='year' width=100>
+           <button ng-click='nextMap()'> > </button>
+	  </p>
+
+          <div id='{{chartId}}' class='rChart datamaps'></div>          
+        </div>
+        <script>
+          function rChartsCtrl($scope){
+            $scope.year = %s;
+            $scope.$watch('year', function(newYear){
+              map{{chartId}}.updateChoropleth(chartParams.newData[newYear]);
+            })
+	    $scope.previousMap = function(){
+                   if ($scope.year != %s) {
+                        $scope.year = parseInt($scope.year) - 1;
+                   }
+            }
+            $scope.nextMap = function(){
+                   if ($scope.year != %s) {
+                        $scope.year = parseInt($scope.year) + 1;
+                   }
+           }
+
+          }
+       </script>", my_title, range_[1], range_[6], range_[1], range_[1], range_[6])
+      )
+
+     
+
+    }
+    d$set(newData = data, data = data[[1]], labels=labels)
+    
+  } else {
+    d$set(data = dlply(data, fml$right.name))
+  }
+  return(d)
+}
+```
+
+```{r, eval=FALSE}
+map6 <- ic3(vals ~ State, data = indata, animate="year", my_title='doh')
+map6$set(
+  geographyConfig = list(
+    popupTemplate = "#! function(geo, data){ return '<div class=\"hoverinfo\">' 
+      + geo.properties.name + ' ' + data.year +  '<br>' +  + data.vals + '%' +  
+    '</div>';  } !#"
+  )
+)
+
+# display the map
+map6 
+
+# save the map
+map6$save('map6.html', cdn=TRUE)
+```
 
