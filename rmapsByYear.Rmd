@@ -102,9 +102,7 @@ indata <- read.csv(in_data_file, stringsAsFactors = FALSE)
 # Take a look at the data
 dim(indata)
 head(indata)
-
-# Subset the data to make it more manageable for this tutorial
-indata <- subset(indata, year > 2000)
+str(indata)
 
 # Range of data values
 summary(indata$vals)
@@ -138,7 +136,9 @@ Above, setting the value `cdn=TRUE` embeds references to required javascript lib
 
 If you navigate to your working directory you can double-click on your HTML file (above named `map1.html`) to view your ichoropleth map.
 
-
+#### Challenge
+```
+Create an ichoropleth map of a subset of the years of data, from 200
 
 #### Setting Map Colors
 
