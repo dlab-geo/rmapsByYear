@@ -512,6 +512,8 @@ map8$save('map8.html', cdn=TRUE)
 1. What does the map8.html display for the no data values (California, 2002 & 2004)?
 
 
+
+
 Let's try mapping no data values with the `ichoropleth2` function.
 
 ```{r, eval=FALSE}
@@ -539,4 +541,27 @@ map8b
 map8b$save('map8b.html', cdn=TRUE)
 ```
 
+
+# Data Wrangling
+
+This section provides some extra information for pre-processing the data.
+
+## Wide Data
+
+The data we have worked with so far has been tidy. We have a row for each state for each year, which makes the data in `long` format. 
+If we have a column for each year of data for each state that would be considered `wide` data.
+
+```{r, eval=FALSE}
+# Identify the data to be mapped
+in_data_file_wide <- "https://raw.githubusercontent.com/dlab-geo/rmapsByYear/master/data/Frank_WTID_2013_top1_wide.csv"
+
+# Read in the data
+indata_wide <- read.csv(in_data_file_wide, stringsAsFactors = FALSE)
+  
+dim(indata_wide)
+head(indata_wide)
+  
+```  
+
+As you can see, that's some pretty wide data with one column for 87 years of data (1917 - 2013). Moreover, because the column names are numbers the are read in with an "X" prepended.
 

@@ -1,8 +1,8 @@
-setwd("/Users/patty/Documents/Dlab/consults/robin_e/rmapsByYear")
+setwd("/Users/patty/Documents/Dlab/dlab_workshops/rmapsByYear")
 dir()
 library(tidyr)
 
-d <- read.csv("Frank_WTID_2013_top1_long.csv", stringsAsFactors = FALSE)
+d <- read.csv("data/Frank_WTID_2013_top1_long.csv", stringsAsFactors = FALSE)
 head(d)
 ?spread
 dw <- spread(d,Year,Top1_adj)

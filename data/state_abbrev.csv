@@ -1,0 +1,60 @@
+name,code,type
+Alabama,AL,s
+Alaska,AK,s
+Arizona,AZ,s
+Arkansas,AR,s
+California,CA,s
+Colorado,CO,s
+Connecticut,CT,s
+Delaware,DE,s
+Florida,FL,s
+Georgia,GA,s
+Hawaii,HI,s
+Idaho,ID,s
+Illinois,IL,s
+Indiana,IN,s
+Iowa,IA,s
+Kansas,KS,s
+Kentucky,KY,s
+Louisiana,LA,s
+Maine,ME,s
+Maryland,MD,s
+Massachusetts,MA,s
+Michigan,MI,s
+Minnesota,MN,s
+Mississippi,MS,s
+Missouri,MO,s
+Montana,MT,s
+Nebraska,NE,s
+Nevada,NV,s
+New Hampshire,NH,s
+New Jersey,NJ,s
+New Mexico,NM,s
+New York,NY,s
+North Carolina,NC,s
+North Dakota,ND,s
+Ohio,OH,s
+Oklahoma,OK,s
+Oregon,OR,s
+Pennsylvania,PA,s
+Rhode Island,RI,s
+South Carolina,SC,s
+South Dakota,SD,s
+Tennessee,TN,s
+Texas,TX,s
+Utah,UT,s
+Vermont,VT,s
+Virginia,VA,s
+Washington,WA,s
+West Virginia,WV,s
+Wisconsin,WI,s
+Wyoming,WY,s
+American Samoa,AS,t
+District Of Columbia,DC,t
+Federated States of Micronesia,FM,t
+Guam,GU,t
+Marshall Islands,MH,t
+Northern Mariana Islands,MP,t
+Palau,PW,t
+Puerto Rico,PR,t
+Virgin Islands,VI,t
